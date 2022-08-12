@@ -9,204 +9,161 @@
 
 <br/>
 
-<div class="border container" style="padding:30px;">
-    <form method="post">
+<div class="border container new-case-table" style="padding:30px;">
+    <div class="new-case-scroll">
+        <form method="post">
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.EsasNo"></label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.EsasNo">Esas No</label>
+                    <input asp-for="Dava.EsasNo" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DefterSiraNo"></label>
+                    <input asp-for="Dava.DefterSiraNo" class="form-control" />
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.EsasNo" class="form-control" />
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.YargitayDosyaNo"></label>
+                    <input asp-for="Dava.YargitayDosyaNo" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.DavaTarihi"></label>
+                    <input asp-for="Dava.DavaTarihi" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.DavaTuruKayitNo"></label>
+                    <input asp-for="Dava.DavaTuruKayitNo" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DefterSiraNo"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DefterSiraNo" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.YargitayDosyaNo"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.YargitayDosyaNo" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DavaTarihi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DavaTarihi" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DavaTuruKayitNo"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DavaTuruKayitNo" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
+            
+            
+            
+            <div class="form-group">
                 <label asp-for="Dava.DavaKonusu"></label>
+                <textarea asp-for="Dava.DavaKonusu" class="form-control"
+                          rows="2" cols="50" maxlength="99">
+                 </textarea>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.DavaKonusu" class="form-control" />
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.Lehte"></label>
+                    <input asp-for="Dava.Lehte" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.SonucTahmini"></label>
+                    <input asp-for="Dava.SonucTahmini" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.Lehte"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.Lehte" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.SonucTahmini"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.SonucTahmini" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
+            
+            
+            <div class="form-group">
                 <label asp-for="Dava.Mahkemesi"></label>
+                <textarea asp-for="Dava.Mahkemesi" class="form-control"
+                          rows="2" cols="50" maxlength="99"></textarea>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.Mahkemesi" class="form-control" />
+            
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.DavaTutari"></label>
+                    <input asp-for="Dava.DavaTutari" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.IslahDegeri"></label>
+                    <input asp-for="Dava.IslahDegeri" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.ParaBirimiKayitNo"></label>
+                    <input asp-for="Dava.ParaBirimiKayitNo" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DavaTutari"></label>
+          
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.Davaci"></label>
+                    <input asp-for="Dava.Davaci" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.Davali"></label>
+                    <input asp-for="Dava.Davali" class="form-control" />
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.DavaTutari" class="form-control" />
+           
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DigerDavacilar"></label>
+                    <input asp-for="Dava.DigerDavacilar" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DigerDavalilar"></label>
+                    <input asp-for="Dava.DigerDavalilar" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.IslahDegeri"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.IslahDegeri" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.ParaBirimiKayitNo"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.ParaBirimiKayitNo" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.Davaci"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.Davaci" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.Davali"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.Davali" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DigerDavacilar"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DigerDavacilar" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DigerDavalilar"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DigerDavalilar" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
+           
+            
+            <div class="form-group">
                 <label asp-for="Dava.Aciklama"></label>
+                <textarea asp-for="Dava.Aciklama" class="form-control"
+                          rows="10" cols="80" maxlength="7999"></textarea>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.Aciklama" class="form-control" />
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.OlusturulmaTarihi"></label>
+                    <input asp-for="Dava.OlusturulmaTarihi" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DegistirilmeTarihi"></label>
+                    <input asp-for="Dava.DegistirilmeTarihi" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.OlusturulmaTarihi"></label>
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.OlusturanKisi"></label>
+                    <input asp-for="Dava.OlusturanKisi" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DegistirenKisi"></label>
+                    <input asp-for="Dava.DegistirenKisi" class="form-control" />
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="Dava.OlusturulmaTarihi" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DegistirilmeTarihi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DegistirilmeTarihi" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.OlusturanKisi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.OlusturanKisi" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DegistirenKisi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DegistirenKisi" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.DavaFormTipi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.DavaFormTipi" class="form-control" />
-            </div>
-        </div>
 
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DavaFormTipi"></label>
+                    <input asp-for="Dava.DavaFormTipi" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.TemyizEdildi"></label>
+                    <input asp-for="Dava.TemyizEdildi" class="form-control" />
+                </div>
+            </div>
+            
+            
+            <div class="form-group row offset-4">
+                
+                <div class="col-3">
+                    <input type="submit" value="Ekle" class="btn btn-primary form-control" />
+                </div>
+            
+                <div class="col-3">
+                    <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
+                </div>
+            </div>
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Dava.TemyizEdildi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Dava.TemyizEdildi" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row offset-4">
-            <div class="col-3">
-                <input type="submit" value="Ekle" class="btn btn-primary form-control" />
-            </div>
-            <div class="col-3">
-                <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
-            </div>
-        </div>
-
-    </form>
+        </form>
+</div>
 </div>

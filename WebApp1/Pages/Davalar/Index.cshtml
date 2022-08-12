@@ -3,26 +3,29 @@
 @{
 }
 
-<div class="container row">
+<div class="row">
     <div class="col-6">
-        <h2>Davalar</h2>
+        <h4>Davalar</h4>
     </div>
-    <div class="col-3">
-        <a class="btn btn-info form-control text-white" asp-page="YeniDava">Yeni Dava Ekle</a>
+    <div class="col-2">
+        <a class="btn btn-info form-control text-white" asp-page="YeniDava">
+            Dava Ekle
+        </a>
     </div>
-    <div class="col-3">
+    <div class="col-2">
         <form asp-page="/Davalar" method="get">
-            <div class="form-actions no-color">
-                <p>
-                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-                    <input type="submit" name="Search" class="btn btn-primary" />
-                    <a asp-page="./Davalar">Reset</a>
-                </p>
-            </div>
+                <input type="text" name="SearchString" value="@Model.CurrentFilter"
+                       placeholder="Ara.."/>
         </form>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-info form-control text-white" asp-page="YeniDava">
+            Arşivle
+        </a>
     </div>
 </div>
 
+<br />
 
 @if (Model.Dava.Count() > 0)
 {
@@ -384,7 +387,7 @@
        asp-route-pageIndex="@(Model.Dava.PageIndex - 1)"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @prevDisabled">
-        Previous
+        Geri
     </a>
 
     <a asp-page="/Davalar/Index"
@@ -392,7 +395,7 @@
        asp-route-pageIndex="@(Model.Dava.PageIndex + 1)"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @nextDisabled">
-        Next
+        İleri
     </a>
 }
 else

@@ -9,7 +9,7 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color: black;
 }
 
 .btn-primary {
@@ -58,14 +58,52 @@ html {
   min-height: 100%;
 }
 
-body {
+/*body {*/
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;*/ /* Vertically center the text there */
+/*}*/
+
+
+
+.sidenav {
+    height: 100%;
+    background: #11304a;
+    text-align: center;
+    color: #fff;
+}
+
+.sidenav-text-color {
+    color: white;
+}
+
+.main-btn-color {
+    background: #0170df;
+}
+
+.search-table {
+    width: 10%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    /* When the input field gets focus, change its width to 100% */
+.search-table:focus {
+    width: 50%;
+}
+
+.new-case-table {
+    height: 500px;
+    position: relative;
+}
+
+.new-case-scroll {
+    max-height: 100%;
+    overflow: auto;
 }

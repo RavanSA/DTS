@@ -1,0 +1,75 @@
+﻿@page
+@model WebApp1.Pages.Davalar.GuncelleYerelMahkemeKarariModel
+@{
+}
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Karar.DavaKayitNo"></label>
+            </div>
+            <div class="col-6">
+
+                @{
+                    var id = Request.QueryString.ToString();
+                    string[] tokens = id.Split("=");
+
+
+                }
+                @tokens[1]
+                <input asp-for="Karar.DavaKayitNo" value="@tokens[1].ToString()" type="hidden" class="form-control" />
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Karar.KararNo"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Karar.KararNo" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Karar.KararTarihi"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Karar.KararTarihi" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Karar.KararSonucu"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Karar.KararSonucu" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Karar.KararOzeti"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Karar.KararOzeti" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row offset-4">
+            <div class="col-3">
+                <input type="submit" value="Güncelle" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-3">
+                <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+

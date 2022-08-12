@@ -1,0 +1,64 @@
+﻿@page
+@model WebApp1.Pages.Davalar.DetayModel
+@{
+}
+
+
+<p>@Model.Dava.DavaKayitNo</p>
+<p>@Model.Dava.EsasNo</p>
+<p>@Model.Dava.DefterSiraNo</p>
+@{
+    if (@Model.YerelMahkemeKarari != null)
+    {
+        <p>@Model.YerelMahkemeKarari.DavaKayitNo</p>
+        <p>@Model.YerelMahkemeKarari.KararNo</p>
+        <p>@Model.YerelMahkemeKarari.KararOzeti</p>
+    }
+    else
+    {
+        <p>Mahkeme karari sonuclandırılmadı</p>
+    }
+
+
+    if (@Model.DavaSonucu != null)
+    {
+        <p>@Model.DavaSonucu.DavaKayitNo</p>
+        <p>@Model.DavaSonucu.DavaSonucu1</p>
+    }
+    else
+    {
+        <p>Dava Sonuçlandırılmadı</p>
+    }
+
+    if (@Model.DavaTuru != null)
+    {
+        <p>@Model.DavaTuru.KayitNo</p>
+        <p>@Model.DavaTuru.Tanim</p>
+        <p>@Model.DavaTuru.SiraNo</p>
+    }
+    else
+    {
+        <p>Dava Turu Bulunamadı</p>
+    }
+
+    if (@Model.ParaBirimi != null)
+    {
+        <p>@Model.ParaBirimi.KayitNo</p>
+        <p>@Model.ParaBirimi.Tanimi</p>
+        <p>@Model.ParaBirimi.SiraNo</p>
+    }
+    else
+    {
+        <p>Para Birimi Bulunamadı</p>
+    }
+
+    if (Model.Temyiz != null) {
+        
+            <p>@Model.Temyiz.DavaKayitNo</p>
+            <p>@Model.Temyiz.Aciklama</p>
+            <p>@Model.Temyiz.TemyizTarihi</p>
+        }  else {  <p>Temyize Basvurulmadı</p>}
+
+    }
+}
+

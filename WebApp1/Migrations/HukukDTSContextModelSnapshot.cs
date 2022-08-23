@@ -27,6 +27,7 @@ namespace WebApp1.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)")
                         .HasMaxLength(8000)
                         .IsUnicode(false);
@@ -35,6 +36,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DavaKonusu")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
@@ -43,6 +45,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<int?>("DavaTuruKayitNo")
+                        .IsRequired()
                         .HasColumnName("DavaTuru_KayitNo")
                         .HasColumnType("int");
 
@@ -50,21 +53,25 @@ namespace WebApp1.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Davaci")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
                     b.Property<string>("Davali")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
                     b.Property<string>("DefterSiraNo")
+                        .IsRequired()
                         .HasColumnType("varchar(500)")
                         .HasMaxLength(500)
                         .IsUnicode(false);
 
                     b.Property<string>("DegistirenKisi")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
@@ -73,16 +80,19 @@ namespace WebApp1.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("DigerDavacilar")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("DigerDavalilar")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("EsasNo")
+                        .IsRequired()
                         .HasColumnType("varchar(500)")
                         .HasMaxLength(500)
                         .IsUnicode(false);
@@ -94,11 +104,13 @@ namespace WebApp1.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Mahkemesi")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("OlusturanKisi")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
@@ -120,6 +132,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("YargitayDosyaNo")
+                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
@@ -149,6 +162,9 @@ namespace WebApp1.Migrations
                         .HasColumnType("varchar(500)")
                         .HasMaxLength(500)
                         .IsUnicode(false);
+
+                    b.Property<string>("DosyaTuru")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Ek")
                         .HasColumnType("image");
@@ -289,6 +305,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("IcraSafhasi")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)")
                         .HasMaxLength(8000)
                         .IsUnicode(false);
@@ -300,6 +317,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("KaldirmaNo")
+                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
@@ -677,6 +695,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Aciklama")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)")
                         .HasMaxLength(8000)
                         .IsUnicode(false);
@@ -702,11 +721,13 @@ namespace WebApp1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KararNo")
+                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
 
                     b.Property<string>("KararOzeti")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)")
                         .HasMaxLength(8000)
                         .IsUnicode(false);
@@ -727,7 +748,9 @@ namespace WebApp1.Migrations
                     b.HasOne("WebApp1.Models.DavaTuru", "DavaTuruKayitNoNavigation")
                         .WithMany("Dava")
                         .HasForeignKey("DavaTuruKayitNo")
-                        .HasConstraintName("FK_Dava_DavaTuru");
+                        .HasConstraintName("FK_Dava_DavaTuru")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WebApp1.Models.ParaBirimi", "ParaBirimiKayitNoNavigation")
                         .WithMany("Dava")

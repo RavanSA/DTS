@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using WebApp1.Models;
 
 namespace WebApp1.Pages.Davalar
@@ -36,9 +37,13 @@ namespace WebApp1.Pages.Davalar
                 //KararDB.KararTarihi = Karar.KararTarihi;
                 //KararDB.KararSonucu = Karar.KararSonucu;
                 //KararDB.KararOzeti = Karar.KararOzeti;
-                await _db.YerelMahkemeKarari.AddAsync(Karar);
+                //await _db.YerelMahkemeKarari.AddAsync(Karar);
+                _db.Entry(Karar).State = !_db.YerelMahkemeKarari.Any(k => k.DavaKayitNo == Karar.DavaKayitNo) 
+                    ? EntityState.Added : EntityState.Modified;
+
                 await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
+
+                return RedirectToPage("/Davalar/Index");
 
             } else
             {

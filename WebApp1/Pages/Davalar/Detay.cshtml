@@ -3,62 +3,404 @@
 @{
 }
 
-
-<p>@Model.Dava.DavaKayitNo</p>
-<p>@Model.Dava.EsasNo</p>
-<p>@Model.Dava.DefterSiraNo</p>
-@{
-    if (@Model.YerelMahkemeKarari != null)
-    {
-        <p>@Model.YerelMahkemeKarari.DavaKayitNo</p>
-        <p>@Model.YerelMahkemeKarari.KararNo</p>
-        <p>@Model.YerelMahkemeKarari.KararOzeti</p>
-    }
-    else
-    {
-        <p>Mahkeme karari sonuclandırılmadı</p>
-    }
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <h4>Dava Detayı</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <p><a class="nav-upt-link" asp-area="" asp-page="/Index">Tüm Davalar</a> / Dava Detayı</p>
+    </div>
+</div>
 
 
-    if (@Model.DavaSonucu != null)
-    {
-        <p>@Model.DavaSonucu.DavaKayitNo</p>
-        <p>@Model.DavaSonucu.DavaSonucu1</p>
-    }
-    else
-    {
-        <p>Dava Sonuçlandırılmadı</p>
-    }
+<div class="border container case-summary-form" style="padding:30px;">
+    <div class="form-row case-summary-scroll">  
+        <div class="form-group col-md-6">
+            <div class="border container ">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <h5>Dava Detayı</h5>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h5>
+                            <a asp-page="DavaGuncelle" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
+                        </h5>
+                    </div>
+                </div>
+                @{ 
+                    var id = Request.QueryString.ToString();
+                    string[] tokens = id.Split("=");
+                    string davaID = tokens[1].ToString();
+                }
+                <table style="width:100%;table-layout: fixed;word-wrap: break-word;">
+                    <tr>
+                        <th>Dava Kayıt No:</th>
+                        <td>@Model.Dava.DavaKayitNo</td>
+                    </tr>
 
-    if (@Model.DavaTuru != null)
-    {
-        <p>@Model.DavaTuru.KayitNo</p>
-        <p>@Model.DavaTuru.Tanim</p>
-        <p>@Model.DavaTuru.SiraNo</p>
-    }
-    else
-    {
-        <p>Dava Turu Bulunamadı</p>
-    }
+                    <tr>
+                        <th>Esas No:</th>
+                        <td>@Model.Dava.EsasNo</td>
+                    </tr>
 
-    if (@Model.ParaBirimi != null)
-    {
-        <p>@Model.ParaBirimi.KayitNo</p>
-        <p>@Model.ParaBirimi.Tanimi</p>
-        <p>@Model.ParaBirimi.SiraNo</p>
-    }
-    else
-    {
-        <p>Para Birimi Bulunamadı</p>
-    }
+                    <tr>
+                        <th>Defter Sıra No:</th>
+                        <td>@Model.Dava.DefterSiraNo</td>
+                    </tr>
 
-    if (Model.Temyiz != null) {
-        
-            <p>@Model.Temyiz.DavaKayitNo</p>
-            <p>@Model.Temyiz.Aciklama</p>
-            <p>@Model.Temyiz.TemyizTarihi</p>
-        }  else {  <p>Temyize Basvurulmadı</p>}
+                    <tr>
+                        <th>Yargıtay Dosya No:</th>
+                        <td>@Model.Dava.YargitayDosyaNo</td>
+                    </tr>
 
-    }
-}
+                    <tr>
+                        <th>Dava Türü:</th>
+                        <td>@Model.Dava.DavaTarihi</td>
+                    </tr>
 
+                    <tr>
+                        <th>Dava Türü Kayıt No:</th>
+                        <td>@Model.Dava.DavaTuruKayitNo</td>
+                    </tr>
+
+                    <tr>
+                        <th>Dava Konusu:</th>
+
+                        <td>
+                            <p style="word-wrap: break-word;">@Model.Dava.DavaKonusu</p>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Lehte:</th>
+                        <td>
+                            @{
+                                var lehte = Model.Dava.Lehte == true ? "Lehte" :
+                                   Model.Dava.Lehte == false ? "Aleyhte" : "Belirsiz";
+
+                            }
+                            @lehte
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Tahmini Sonuç:</th>
+                        <td>
+                            @{
+                                var sonucTahmini = Model.Dava.SonucTahmini == true ? "Lehte" :
+                                   Model.Dava.Lehte == false ? "Aleyhte" : "Yorumsuz";
+                            }
+                            @sonucTahmini
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Mahkemesi:</th>
+                        <td>
+                            <p style="word-wrap: break-word;">@Model.Dava.Mahkemesi</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Dava Tutarı:</th>
+                        <td>@Model.Dava.DavaTutari</td>
+                    </tr>
+
+                    <tr>
+                        <th>Islah Değeri:</th>
+                        <td>@Model.Dava.IslahDegeri</td>
+                    </tr>
+
+                    <tr>
+                        <th>Para Birimi:</th>
+                        <td>@Model.Dava.ParaBirimiKayitNo</td>
+                    </tr>
+
+                    <tr>
+                        <th>Davacı:</th>
+                        <td>@Model.Dava.Davaci</td>
+                    </tr>
+
+                    <tr>
+                        <th>Davalı</th>
+                        <td>@Model.Dava.Davali</td>
+                    </tr>
+
+                    <tr>
+                        <th>Diger Davacilar:</th>
+                        <td>@Model.Dava.DigerDavacilar</td>
+                    </tr>
+
+                    <tr>
+                        <th>Diger Davalilar:</th>
+                        <td>@Model.Dava.DigerDavalilar</td>
+                    </tr>
+
+                    <tr style="word-wrap: break-word;">
+                        <th>Açıklama:</th>
+                        <td>
+                            <p>@Model.Dava.Aciklama</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Oluşturulma Tarihi:</th>
+                        <td>@Model.Dava.OlusturulmaTarihi</td>
+                    </tr>
+
+                    <tr>
+                        <th>Değiştirilme Tarihi:</th>
+                        <td>@Model.Dava.DegistirilmeTarihi</td>
+                    </tr>
+
+                    <tr>
+                        <th>Oluşturan Kişi:</th>
+                        <td>@Model.Dava.OlusturanKisi</td>
+                    </tr>
+
+                    <tr>
+                        <th>Değiştiren Kişi:</th>
+                        <td>@Model.Dava.DegistirenKisi</td>
+                    </tr>
+
+                    <tr>
+                        <th>Dava Form Tipi:</th>
+                        <td>@Model.Dava.DavaFormTipi</td>
+                    </tr>
+
+                    <tr>
+                        <th>Temyiz:</th>
+                        <td>
+                            @{
+                                var temyiz = Model.Dava.TemyizEdildi == true ? "Temyiz Edildi" :
+                                   Model.Dava.Lehte == false ? "Temyiz Edilmedi" : "Belirsiz";
+                            }
+                            @temyiz
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            </div>
+        <div class="form-group col-md-6">
+            <div class="border container">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <h5>Yerel Mahkeme Kararı</h5>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h5>
+                            <a asp-page="GuncelleYerelMahkemeKarari" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
+                        </h5>
+                    </div>
+                </div>
+                @{
+                    if (@Model.YerelMahkemeKarari != null)
+                    {
+                        <table class="case-summary-scroll" style="width:100%;table-layout:fixed; word-wrap: break-word;">
+                            <tr>
+                                <th>Karar No:</th>
+                                <td>@Model.YerelMahkemeKarari.KararNo</td>
+                            </tr>
+                            <tr>
+                                <th>Karar Tarihi:</th>
+                                <td>@Model.YerelMahkemeKarari.KararTarihi</td>
+                            </tr>
+                            <tr>
+                                <th>Karar Sonucu:</th>
+                                <td>
+                                    @{
+                                        var kararSonucu =
+                                            Model.YerelMahkemeKarari.KararSonucu == true ? "Lehte" :
+                                           Model.YerelMahkemeKarari.KararSonucu == false ? "Aleyhte" : "Belirsiz";
+                                    }
+                                    @kararSonucu
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Karar Özeti:</th>
+                                <td>@Model.YerelMahkemeKarari.KararOzeti</td>
+                            </tr>
+                        </table>
+
+                    }
+                    else
+                    {
+                        <p>Mahkeme karari sonuclandırılmadı</p>
+
+                    }
+                }
+            </div><br />
+            <div class="border container">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <h5>Dava Sonucu</h5>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h5>
+                            <a asp-page="DavaSonucu" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
+                        </h5>
+                    </div>
+                </div>
+                @{ if (@Model.DavaSonucu != null)
+                    {
+                        <table class="case-summary-scroll" style="width:100%;table-layout:fixed; word-wrap: break-word;">
+                            <tr>
+                                <th>Karar No:</th>
+                                <td>@Model.DavaSonucu.KaldirmaNo</td>
+                            </tr>
+                            <tr>
+                                <th>Sonuç Tarihi:</th>
+                                <td>@Model.DavaSonucu.SonucTarihi</td>
+                            </tr>
+                            <tr>
+                                <th>Dava Sonucu:</th>
+                                <td>
+                                    @{
+                                        var davaSonucu =
+                                            Model.DavaSonucu.DavaSonucu1 == true ? "Lehte" :
+                                           Model.DavaSonucu.DavaSonucu1 == false ? "Aleyhte" : "Belirsiz";
+                                    }
+                                    @davaSonucu
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>İcra Safhası:</th>
+                                <td>@Model.DavaSonucu.IcraSafhasi</td>
+                            </tr>
+                            <tr>
+                                <th>Asıl Alacak:</th>
+                                <td>@Model.DavaSonucu.AsilAlacak</td>
+                            </tr>
+                            <tr>
+                                <th>İşlenmiş Faiz:</th>
+                                <td>@Model.DavaSonucu.IslenmisFaiz</td>
+                            </tr>
+                            <tr>
+                                <th>Mahkeme Harc ve Masrafı:</th>
+                                <td>@Model.DavaSonucu.MahkemeHarcveMasrafi</td>
+                            </tr>
+                            <tr>
+                                <th>İcra Masrafları:</th>
+                                <td>@Model.DavaSonucu.IcraMasraflari</td>
+                            </tr>
+                            <tr>
+                                <th>Vekalet Ücretleri:</th>
+                                <td>@Model.DavaSonucu.VekaletUcretleri</td>
+                            </tr>
+                            <tr>
+                                <th>İcra Vekalet Ücretleri:</th>
+                                <td>@Model.DavaSonucu.IcraVekaletUcreti</td>
+                            </tr>
+                            <tr>
+                                <th>Ödeme Tarihi:</th>
+                                <td>@Model.DavaSonucu.OdemeTarihi</td>
+                            </tr>
+                        </table>
+                    }
+
+                    else
+                    {
+                        <p>Dava sonuclandırılmadı</p>
+
+                    }
+                }
+            </div><br />
+            <div class="border container">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <h5>Temyiz</h5>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h5>
+                            <a asp-page="Temyiz" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
+                        </h5>
+                    </div>
+                </div>
+                @{ if (@Model.Temyiz != null)
+                    {
+                        <table class="case-summary-scroll" style="width:100%;table-layout:fixed; word-wrap: break-word;">
+                            <tr>
+                                <th>Temyiz Eden:</th>
+                                <td>
+                                    @{
+                                        var temyizEden =
+                                            Model.Temyiz.TemyizEdenPetkim == true ? "Petkim" :
+                                           Model.Temyiz.TemyizEdenPetkim == false ? "Karşı Taraf" : "Belirsiz";
+                                    }
+                                    @temyizEden
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Temyiz Tarihi:</th>
+                                <td>@Model.Temyiz.TemyizTarihi</td>
+                            </tr>
+                            <tr>
+                                <th>Temyiz Sonucu:</th>
+                                <td>
+                                    @{
+                                        var temyizSonucu =
+                                            Model.Temyiz.TemyizSonucu == true ? "Lehte" :
+                                           Model.Temyiz.TemyizSonucu == false ? "Aleyhte" : "Belirsiz";
+                                    }
+                                    @temyizSonucu
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Açıklama:</th>
+                                <td>@Model.Temyiz.Aciklama</td>
+                            </tr>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Temyize basvurulmadı</p>
+
+                    }
+                }
+            </div><br>
+                  <div class="border container">
+                      <div class="form-row">
+                          <div class="form-group col-md-10">
+                              <h5>Dava Eki</h5>
+                          </div>
+                          <div class="form-group col-md-2">
+                              <form method="post" enctype="multipart/form-data">
+                                  <input type="file" name="dosya" />
+                                  <input type="submit" id="btnUpload" value="Upload" asp-page-handler="UploadFile" />
+                                  <input asp-for="davaKayitNo" name="davaKayitNo" value="@davaID.ToString()"
+                                         type="hidden" class="form-control" />
+                              </form>
+                          </div>
+                      </div>
+                      @{ if (@Model.DavaEki != null)
+                          {
+                              <table id="tblFiles" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                      <th style="width:50px">Dosya Adı</th>
+                                      <th style="width:120px">Ek</th>
+                                  </tr>
+                                  @foreach (var file in Model.DavaEki)
+                                  {
+                                      <tr>
+                                          <td>Ek-@file.KayitNo</td>
+                                          <td>
+                                              <a href="@Url.Page("Detay", "DownloadFile", new { dosyaId = file.KayitNo })">
+                                                  Yükle
+                                              </a>
+                                          </td>
+                                      </tr>
+                                  }
+                              </table>
+                          }
+                          else
+                          {
+                              <p>Dava Eki bulunamadı</p>
+
+                          }
+                      }
+                  </div><br>
+        </div>
+</div>
+</div>

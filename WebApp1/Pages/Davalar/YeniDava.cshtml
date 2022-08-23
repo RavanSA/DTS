@@ -3,11 +3,14 @@
 @{
 }
 
-<br/>
-
-<h2 class="text-info">Yeni Dava Ekle</h2>
-
-<br/>
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <h4>Yeni Dava Ekle</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <p><a class="nav-upt-link" asp-area="" asp-page="/Index">Tüm Davalar</a> / Yeni Dava</p>
+    </div>
+</div>
 
 <div class="border container new-case-table" style="padding:30px;">
     <div class="new-case-scroll">
@@ -16,149 +19,170 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="Dava.EsasNo">Esas No</label>
-                    <input asp-for="Dava.EsasNo" class="form-control" />
+                    <input asp-for="Dava.EsasNo" class="form-control" placeholder="Esas No" required/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="Dava.DefterSiraNo"></label>
-                    <input asp-for="Dava.DefterSiraNo" class="form-control" />
+                    <label asp-for="Dava.DefterSiraNo">Defter Sıra No</label>
+                    <input asp-for="Dava.DefterSiraNo" class="form-control" placeholder="Defter Sıra No" required/>
                 </div>
             </div>
-            
-            
+            <br />
+
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label asp-for="Dava.YargitayDosyaNo"></label>
-                    <input asp-for="Dava.YargitayDosyaNo" class="form-control" />
+                    <label asp-for="Dava.YargitayDosyaNo">Yargıtay Dosya No</label>
+                    <input asp-for="Dava.YargitayDosyaNo" class="form-control" placeholder="Yargıtay Dosya No" required />
                 </div>
                 <div class="form-group col-md-4">
-                    <label asp-for="Dava.DavaTarihi"></label>
-                    <input asp-for="Dava.DavaTarihi" class="form-control" />
+                    <label asp-for="Dava.DavaTarihi">Dava Tarihi</label>
+                    <input asp-for="Dava.DavaTarihi" class="form-control" placeholder="Dava Tarihi" required />
                 </div>
                 <div class="form-group col-md-4">
-                    <label asp-for="Dava.DavaTuruKayitNo"></label>
-                    <input asp-for="Dava.DavaTuruKayitNo" class="form-control" />
-                </div>
-            </div>
-            
-            
-            
-            <div class="form-group">
-                <label asp-for="Dava.DavaKonusu"></label>
-                <textarea asp-for="Dava.DavaKonusu" class="form-control"
-                          rows="2" cols="50" maxlength="99">
-                 </textarea>
-            </div>
-            
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.Lehte"></label>
-                    <input asp-for="Dava.Lehte" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.SonucTahmini"></label>
-                    <input asp-for="Dava.SonucTahmini" class="form-control" />
-                </div>
-            </div>
-            
-            
-            <div class="form-group">
-                <label asp-for="Dava.Mahkemesi"></label>
-                <textarea asp-for="Dava.Mahkemesi" class="form-control"
-                          rows="2" cols="50" maxlength="99"></textarea>
-            </div>
-            
-            
-            
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label asp-for="Dava.DavaTutari"></label>
-                    <input asp-for="Dava.DavaTutari" class="form-control" />
-                </div>
-                <div class="form-group col-md-4">
-                    <label asp-for="Dava.IslahDegeri"></label>
-                    <input asp-for="Dava.IslahDegeri" class="form-control" />
-                </div>
-                <div class="form-group col-md-4">
-                    <label asp-for="Dava.ParaBirimiKayitNo"></label>
-                    <input asp-for="Dava.ParaBirimiKayitNo" class="form-control" />
-                </div>
-            </div>
-          
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.Davaci"></label>
-                    <input asp-for="Dava.Davaci" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.Davali"></label>
-                    <input asp-for="Dava.Davali" class="form-control" />
-                </div>
-            </div>
-           
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.DigerDavacilar"></label>
-                    <input asp-for="Dava.DigerDavacilar" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.DigerDavalilar"></label>
-                    <input asp-for="Dava.DigerDavalilar" class="form-control" />
-                </div>
-            </div>
-           
-            
-            <div class="form-group">
-                <label asp-for="Dava.Aciklama"></label>
-                <textarea asp-for="Dava.Aciklama" class="form-control"
-                          rows="10" cols="80" maxlength="7999"></textarea>
-            </div>
-            
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.OlusturulmaTarihi"></label>
-                    <input asp-for="Dava.OlusturulmaTarihi" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.DegistirilmeTarihi"></label>
-                    <input asp-for="Dava.DegistirilmeTarihi" class="form-control" />
-                </div>
-            </div>
-            
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.OlusturanKisi"></label>
-                    <input asp-for="Dava.OlusturanKisi" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Dava.DegistirenKisi"></label>
-                    <input asp-for="Dava.DegistirenKisi" class="form-control" />
+                    <label asp-for="Dava.DavaTuruKayitNo">Dava Türü</label>
+                    <select asp-for="Dava.DavaTuruKayitNo" class="form-control">
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                 </div>
             </div>
 
-            
+
+            <br />
+
+            <div class="form-group">
+                <label asp-for="Dava.DavaKonusu"></label>
+                <textarea asp-for="Dava.DavaKonusu" class="form-control"
+                          rows="2" cols="50" maxlength="99" placeholder="Dava Konusu" required>
+                 </textarea>
+            </div>
+
+            <br />
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label asp-for="Dava.DavaFormTipi"></label>
-                    <input asp-for="Dava.DavaFormTipi" class="form-control" />
+                    <label asp-for="Dava.Lehte">Dava Lehte</label>
+                    <select asp-for="Dava.Lehte" class="form-control">
+                        <option value="true" selected>Lehte</option>
+                        <option value="false">Aleyhte</option>
+                        <option value="">Belirsiz</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="Dava.TemyizEdildi"></label>
-                    <input asp-for="Dava.TemyizEdildi" class="form-control" />
+                    <label asp-for="Dava.SonucTahmini">Tahmini Sonuç</label>
+                    <select asp-for="Dava.SonucTahmini" class="form-control">
+                        <option value="">Yorumsuz</option>
+                        <option value="true">Lehte</option>
+                        <option value="false">Aleyhte</option>
+                    </select>
                 </div>
             </div>
-            
-            
+
+            <br />
+            <div class="form-group">
+                <label asp-for="Dava.Mahkemesi">Mahkemesi</label>
+                <textarea asp-for="Dava.Mahkemesi" class="form-control"
+                          rows="2" cols="50" maxlength="99" placeholder="Mahkemesi" required></textarea>
+            </div>
+
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.DavaTutari">Dava Tutarı</label>
+                    <input asp-for="Dava.DavaTutari" class="form-control" placeholder="Dava Tutarı" type="number"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.IslahDegeri">Islah Değeri</label>
+                    <input asp-for="Dava.IslahDegeri" class="form-control" placeholder="Islah Değeri" type="number"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Dava.ParaBirimiKayitNo">Para Birimi</label>
+                    <select asp-for="Dava.ParaBirimiKayitNo" class="form-control">
+                        <option value="1">$</option>
+                        <option value="2" selected>tl</option>
+                    </select>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.Davaci">Davacı</label>
+                    <input asp-for="Dava.Davaci" class="form-control" placeholder="Davacı" required/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.Davali">Davalı</label>
+                    <input asp-for="Dava.Davali" class="form-control" placeholder="Davalı" required/>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DigerDavacilar">Diğer Davacılar</label>
+                    <input asp-for="Dava.DigerDavacilar" class="form-control" placeholder="Diğer Davacılar" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DigerDavalilar">Diğer Davalılar</label>
+                    <input asp-for="Dava.DigerDavalilar" class="form-control" placeholder="Diğer Davalılar" required />
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label asp-for="Dava.Aciklama">Açıklama</label>
+                <textarea asp-for="Dava.Aciklama" class="form-control"
+                          rows="6" cols="80" maxlength="7999" placeholder="Açıklama" required></textarea>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.OlusturulmaTarihi">Oluşturulma Tarihi</label>
+                    <input asp-for="Dava.OlusturulmaTarihi" class="form-control" placeholder="Oluşturulma Tarihi" required/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DegistirilmeTarihi">Değiştirilme Tarihi</label>
+                    <input asp-for="Dava.DegistirilmeTarihi" class="form-control" placeholder="Değiştirilme Tarihi" />
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.OlusturanKisi">Oluşturan Kişi</label>
+                    <input asp-for="Dava.OlusturanKisi" class="form-control" placeholder="Oluşturan Kişi" required/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DegistirenKisi">Değiştiren Kişi</label>
+                    <input asp-for="Dava.DegistirenKisi" class="form-control" placeholder="Değiştiren Kişi" required/>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Dava.DavaFormTipi">Dava Form Tipi</label>
+                    <input asp-for="Dava.DavaFormTipi" class="form-control" placeholder="Dava Form Tipi" />
+                </div>
+                <div class="form-group col-md-6">
+                    
+                    <label asp-for="Dava.TemyizEdildi">Temyiz Durumu</label>
+                    <select asp-for="Dava.TemyizEdildi" class="form-control">
+                        <option value="true">Edildi</option>
+                        <option value="false">Edilmedi</option>
+                        <option value="" selected>Belirsiz</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+
             <div class="form-group row offset-4">
-                
+
                 <div class="col-3">
                     <input type="submit" value="Ekle" class="btn btn-primary form-control" />
                 </div>
-            
+
                 <div class="col-3">
                     <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
                 </div>

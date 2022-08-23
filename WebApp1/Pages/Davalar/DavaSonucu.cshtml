@@ -3,136 +3,114 @@
 @{
 }
 
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <h4>Dava Sonucu Güncelle</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <p><a class="nav-upt-link" asp-area="" asp-page="/Index">Ana Sayfa</a> / Dava Sonucu</p>
+    </div>  
+</div>
+
+<div class="border container conc-case-form" style="padding:30px;">
+    <div class="conc-case-scroll">
+
+        <form method="post">
+
+            <center>
+            <div class="form-row">
+                <div class="form-group col-md-12 txt-center">
+                    @{
+                        var id = Request.QueryString.ToString();
+                        string[] tokens = id.Split("=");
+                    }
+               
+                    <h4><label asp-for="DavaSonucu.DavaKayitNo">Dava Kayıt No @tokens[1]</label></h4>
 
 
-<div class="border container" style="padding:30px;">
-    <form method="post">
+                    <input asp-for="DavaSonucu.DavaKayitNo" value="@tokens[1].ToString()"
+                           type="hidden" class="form-control" />
+                </div>
+            </div>
+        </center>
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.DavaKayitNo"></label>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.SonucTarihi"> Sonuç Tarihi</label>
+                    <input asp-for="DavaSonucu.SonucTarihi" class="form-control" required/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.KaldirmaNo">Kaldırma No</label>
+                    <input asp-for="DavaSonucu.KaldirmaNo" class="form-control" placeholder="Kaldırma No"  required/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.DavaSonucu1">Dava Sonucu</label>
+                    <select asp-for="DavaSonucu.DavaSonucu1" class="form-control">
+                        <option value="true">Lehte</option>
+                        <option value="false">Aleyhte</option>
+                        <option value="" selected>Belirsiz</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-6">
-                @{
-                    var id = Request.QueryString.ToString();
-                    string[] tokens = id.Split("=");
-                }
-                @tokens[1]
-                <input asp-for="DavaSonucu.DavaKayitNo" value="@tokens[1].ToString()" type="hidden" class="form-control" />
 
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="DavaSonucu.IcraSafhasi">İcra Safhası</label>
+                    <textarea asp-for="DavaSonucu.IcraSafhasi" class="form-control"
+                              rows="6" cols="80" maxlength="7999" placeholder="İcra Safhası" required></textarea>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.SonucTarihi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.SonucTarihi" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.KaldirmaNo"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.KaldirmaNo" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.DavaSonucu1"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.DavaSonucu1" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.IcraSafhasi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.IcraSafhasi" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.AsilAlacak"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.AsilAlacak" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.IslenmisFaiz"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.IslenmisFaiz" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.MahkemeHarcveMasrafi"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.MahkemeHarcveMasrafi" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.IcraMasraflari"></label>
-            </div>
-             <div class="col-6">
-                <input asp-for="DavaSonucu.IcraMasraflari" class="form-control" />
-            </div>
-        </div>
 
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.VekaletUcretleri"></label>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label asp-for="DavaSonucu.AsilAlacak">Asıl Alacak</label>
+                    <input asp-for="DavaSonucu.AsilAlacak" class="form-control" placeholder="Asıl Alacak" type="number"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="DavaSonucu.IslenmisFaiz">İşlenmiş Faiz</label>
+                    <input asp-for="DavaSonucu.IslenmisFaiz" class="form-control" placeholder="İşlenmiş Faiz" type="number" />
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.VekaletUcretleri" class="form-control" />
-            </div>
-        </div>
 
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.IcraVekaletUcreti"></label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="DavaSonucu.MahkemeHarcveMasrafi">Mahkeme Harc ve Masrafı</label>
+                    <input asp-for="DavaSonucu.MahkemeHarcveMasrafi" class="form-control" placeholder="Mahkeme Harc ve Masrafı" type="number"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="DavaSonucu.IcraMasraflari">İcra Masrafları</label>
+                    <input asp-for="DavaSonucu.IcraMasraflari" class="form-control" placeholder="İcra Masrafları" type="number"/>
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.IcraVekaletUcreti" class="form-control" />
-            </div>
-        </div>
 
 
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="DavaSonucu.OdemeTarihi"></label>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.VekaletUcretleri">Vekalet Ücretleri</label>
+                    <input asp-for="DavaSonucu.VekaletUcretleri" class="form-control" placeholder="Vekalet Ücretleri" type="number"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.IcraVekaletUcreti">İcra Vekalet Ücreti</label>
+                    <input asp-for="DavaSonucu.IcraVekaletUcreti" class="form-control" placeholder="İcra Vekalet Ücreti" type="number"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="DavaSonucu.OdemeTarihi">Ödeme Tarihi</label>
+                    <input asp-for="DavaSonucu.OdemeTarihi" class="form-control" placeholder="Ödeme Tarihi" />
+                </div>
             </div>
-            <div class="col-6">
-                <input asp-for="DavaSonucu.OdemeTarihi" class="form-control" />
-            </div>
-        </div>
 
-        <div class="form-group row offset-4">
-            <div class="col-3">
-                <input type="submit" value="Güncelle" class="btn btn-primary form-control" />
-            </div>
-            <div class="col-3">
-                <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
-            </div>
-        </div>
 
-    </form>
+            <div class="form-group row offset-4">
+                <div class="col-4">
+                    <input type="submit" value="GÜNCELLE" class="btn btn-dark form-control" />
+                </div>
+                <div class="col-4">
+                    <a asp-page="Index" class="btn btn-dark form-control">Geri dön</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
 </div>

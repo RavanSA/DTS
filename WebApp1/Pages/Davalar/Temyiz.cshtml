@@ -3,66 +3,83 @@
 @{
 }
 
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <h4>Temyiz Güncelle</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <p><a class="nav-upt-link" asp-area="" asp-page="/Index">Tüm Davalar</a> / Temyiz</p>
+    </div>
+</div>
+
 <div class="border container" style="padding:30px;">
     <form method="post">
 
+        <center>
+            <div class="form-row">
+                <div class="form-group col-md-12 txt-center">
+                    @{
+                        var id = Request.QueryString.ToString();
+                        string[] tokens = id.Split("=");
+                    }
+                    <h4><label asp-for="Temyiz.DavaKayitNo">Dava Kayıt No @tokens[1]</label></h4>
+                    <input asp-for="Temyiz.DavaKayitNo" value="@tokens[1].ToString()"
+                           type="hidden" class="form-control" />
+                </div>
+            </div>
+        </center>
+
         <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Temyiz.DavaKayitNo"></label>
+            <div class="col-4">,
+                <label asp-for="Temyiz.TemyizEdenPetkim"> Temyiz Eden</label>
             </div>
             <div class="col-6">
-                @{
-                    var id = Request.QueryString.ToString();
-                    string[] tokens = id.Split("=");
-                }
-                @tokens[1]
-                <input asp-for="Temyiz.DavaKayitNo" value="@tokens[1].ToString()" type="hidden" class="form-control" />
-                  
+                <select asp-for="Temyiz.TemyizEdenPetkim" class="form-control">
+                    <option value="true" selected>Petkim</option>
+                    <option value="false">Karşı Taraf</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="Temyiz.TemyizEdenPetkim"></label>
+                <label asp-for="Temyiz.TemyizTarihi">Temyiz Tarihi</label>
             </div>
             <div class="col-6">
-                <input asp-for="Temyiz.TemyizEdenPetkim" class="form-control" />
+                <input asp-for="Temyiz.TemyizTarihi" class="form-control" placeholder="Temyiz Tarihi"/>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="Temyiz.TemyizTarihi"></label>
+                <label asp-for="Temyiz.TemyizSonucu">Sonuç</label>
             </div>
             <div class="col-6">
-                <input asp-for="Temyiz.TemyizTarihi" class="form-control" />
+                <select asp-for="Temyiz.TemyizSonucu" class="form-control">
+                    <option value="true" selected>Lehte</option>
+                    <option value="false">Aleyhte</option>
+                    <option value="">Belirsiz</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="Temyiz.TemyizSonucu"></label>
+                <label asp-for="Temyiz.Aciklama">Açıklama</label>
             </div>
             <div class="col-6">
-                <input asp-for="Temyiz.TemyizSonucu" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="Temyiz.Aciklama"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="Temyiz.Aciklama" class="form-control" />
+                <textarea asp-for="Temyiz.Aciklama" class="form-control"
+                          rows="5" cols="10" maxlength="8000" placeholder="Temyiz Açıklama" required>
+                 </textarea>
             </div>
         </div>
 
         <div class="form-group row offset-4">
             <div class="col-3">
-                <input type="submit" value="Güncelle" class="btn btn-primary form-control" />
+                <input type="submit" value="Güncelle" class="btn btn-dark form-control" />
             </div>
             <div class="col-3">
-                <a asp-page="Index" class="btn btn-success form-control">Geri dön</a>
+                <a asp-page="Index" class="btn btn-dark form-control">Geri dön</a>
             </div>
         </div>
 

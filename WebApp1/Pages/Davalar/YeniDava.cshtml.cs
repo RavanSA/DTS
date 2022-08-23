@@ -34,9 +34,10 @@ namespace WebApp1.Pages.Davalar
             if (ModelState.IsValid)
             {
                 await _db.Dava.AddAsync(Dava);
+            
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Davalar/Index");
             } else
             {
                 return Page();

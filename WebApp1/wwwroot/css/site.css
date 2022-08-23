@@ -9,7 +9,7 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: black;
+  color: blue;
 }
 
 .btn-primary {
@@ -99,11 +99,59 @@ html {
 }
 
 .new-case-table {
-    height: 500px;
+    height: 600px;
     position: relative;
 }
 
 .new-case-scroll {
     max-height: 100%;
     overflow: auto;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.nav-upt-link{
+    margin-left:100px;
+}
+
+.conc-case-form {
+    height: 620px;
+    position: relative;
+}
+
+.conc-case-scroll {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.txt-center {
+    display: flex;
+    justify-content: center;
+}
+
+.case-summary-form {
+    height: 650px;
+    position: relative;
+}
+
+.case-summary-scroll {
+    max-height: 100%;
+    overflow: auto;
+}
+
+#up-icon{
+    visibility: hidden;
+}
+
+.h8 {
+    color: #111111;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.h10 {
+    color: #111111;
+    font-size: 14px;
 }

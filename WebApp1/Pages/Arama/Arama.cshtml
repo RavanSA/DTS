@@ -1,0 +1,178 @@
+﻿@page
+@model WebApp1.Pages.Arama.AramaModel
+@{
+
+
+    <div class="border container" style="padding:30px;">
+        <div>
+            <form method="get">
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>İlk Tarih</label>
+                        <input type="date" value="@Model.ilkTarih" name="ilkTarih" class="form-control" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Son Tarih</label>
+                        <input type="date" value="@Model.sonTarih" name="sonTarih" class="form-control" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.davaTurleri">Dava Sonuçları</label>
+                        <select asp-for="@Model.davaTurleri" class="form-control">
+                            <option value="arasinda_acilan_davalar">Arasında Açılan Davalar</option>
+                            <option value="arasinda_sonuclanan_davalar">Arasında Sonuçlanan Davalar</option>
+                            <option value="arasinda_lehe_sonuclanan_davalar">Arasında Lehe Sonuçlanan Davalar</option>
+                            <option value="arasinda_aleyhe_sonuclanan_davalar">Arasında Aleyhe Sonuçlanan Davalar</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label> </label>
+
+                        <input type="submit" value="Ara" class="btn btn-dark form-control"
+                               asp-route-ilkTarih="@Model.ilkTarih" asp-route-sonTarih="@Model.sonTarih"
+                               asp-route-davaTurleri="@Model.davaTurleri" />
+                    </div>
+                </div>
+                <br />
+
+            </form>
+
+
+            @if (Model.isListEmpty)
+            {
+                <div>
+                    @{ 
+                        var ilk_tarih = Model.ilkTarih;
+                        var son_tarih = Model.sonTarih;
+                        var davaTurleri = Model.davaTurleri;
+                    }
+                    <h3>@Model.ilkTarih @Model.sonTarih @Model.davaTurleri</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" name="todo" />&nbsp;
+                                </th>
+                                <th class="h8">
+                                    Detay
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Dava Kayıt No
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Esas No
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Yargıtay Dosya No
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Dava Tarihi
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Oluşturulma Tarihi
+                                    </a>
+                                </th>
+
+                                <th class="h8">
+                                    <a>Karar No</a>
+                                </th>
+                                <th class="h8">
+                                    <a> Temyiz Durumu</a>
+                                </th>
+                                <th class="h8">
+                                    <a> Kaldırma No</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="h10">
+                            @foreach (var item in Model.Dava)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="todo" />&nbsp;
+                                    </td>
+                                    <td>
+                                        <a asp-page="/Davalar/Detay" asp-route-davaKayitNo="@item.DavaKayitNo"
+                                           class="btn btn-outline-info h8">Detay</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DavaKayitNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EsasNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.YargitayDosyaNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DavaTarihi)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OlusturulmaTarihi)
+
+                                    </td>
+                                    <td>
+                                        @{
+                                            var kararNo = "";
+                                            if (item.KararNo == null)
+                                            {
+                                                kararNo = "Henüz Sonuçlandırılmadı";
+                                            }
+                                            else
+                                            {
+                                                kararNo = item.KararNo;
+                                            }
+
+                                        }
+                                        @Html.DisplayFor(modelItem => kararNo)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TemyizDurumu)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var temyizDurumu = "";
+                                            if (item.KaldirmaNo == null)
+                                            {
+                                                temyizDurumu = "Henüz Sonuçlandırılmadı";
+                                            }
+                                            else
+                                            {
+                                                temyizDurumu = item.KaldirmaNo;
+                                            }
+                                        }
+                                        @Html.DisplayFor(modelItem => temyizDurumu)
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    
+
+                </div>
+
+
+               
+            }
+            else
+            {
+                @*<h2>Dava Bulunamadi</h2>*@
+            }
+
+        </div>
+    </div>
+    
+}
+
+

@@ -49,7 +49,11 @@ namespace WebApp1
 
             app.UseRouting();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ServeUnknownFileTypes = true,
+                DefaultContentType = "text/plain"
+            });
 
             app.UseAuthorization();
 

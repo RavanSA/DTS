@@ -377,3 +377,11 @@ C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\Temyiz.cshtml.g.cs
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\DavaSonucu.cshtml.g.cs
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\Detay.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Rapor\Rapor.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\DavaGuncelle.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Arama\Arama.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\bin\Debug\netcoreapp3.1\ClosedXML.dll
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

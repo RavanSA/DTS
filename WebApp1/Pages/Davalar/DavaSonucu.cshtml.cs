@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using WebApp1.Models;
 
 namespace WebApp1.Pages.Davalar
@@ -31,7 +32,10 @@ namespace WebApp1.Pages.Davalar
         {
             if(ModelState.IsValid)
             {
-                await _db.DavaSonucu.AddAsync(DavaSonucu);
+
+                _db.Entry(DavaSonucu).State = !_db.DavaSonucu.Any(t => t.DavaKayitNo == DavaSonucu.DavaKayitNo) ?
+                    EntityState.Added : EntityState.Modified;
+
                 await _db.SaveChangesAsync();
 
                 return RedirectToPage("Index");

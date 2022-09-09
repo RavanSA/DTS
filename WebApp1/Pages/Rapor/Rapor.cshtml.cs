@@ -74,9 +74,7 @@ namespace WebApp1.Pages.Rapor
                                     SAYI = (dr["SAYI"] as int?).GetValueOrDefault(),
                                     DEGER = (dr["DEGER"] as decimal?).GetValueOrDefault()
                                 });
-
                             }
-                           
                 }
             }
         }

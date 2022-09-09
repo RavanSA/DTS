@@ -35,7 +35,7 @@
                 </div>
   
                 <div class="form-group col-md-3">
-                    <input type="submit" value="Raporla" class="btn btn-dark form-control"
+                    <input type="submit" value="Raporla" class="btn btn-dark btn-search"
                            asp-route-ilkTarih="@Model.ilkTarih" asp-route-sonTarih="@Model.sonTarih"
                            asp-route-lehte="@Model.lehte"  asp-page-handler="DownloadCSV" />
                 </div>
@@ -81,8 +81,8 @@
                     <form method="post">
                         <input type="hidden" asp-for="@Model.ilkTarih" />
                         <input type="hidden" asp-for="@Model.sonTarih" />
-                        <input type="hidden" asp-for="@Model.lehte" />
-                        <input type="submit" class="btn btn-dark form-control" value="Dosya Oluştur" asp-page-handler="DownloadCSV" />
+                        <input type="hidden" asp-for="@Model.lehte" />          
+                         <input type="submit" class="btn btn-dark btn-search" value="Dosya Oluştur" asp-page-handler="DownloadCSV" />
                     </form>
                 </div>
             </div>
@@ -121,4 +121,4 @@
 
         }
     </div>
-</div>
+</div>  n

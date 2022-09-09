@@ -1,10 +1,10 @@
-﻿@page
+﻿@page "/"
 @model WebApp1.Pages.Davalar.IndexModel
 @{
 }
 
-<div class="form-row">
-    <div class="form-group col-md-6">
+<div class="form-row" style="width:90%">
+    <div class="form-group col-md-3">
         <h4>Davalar</h4>
     </div>
     <div class="form-group col-md-2">
@@ -15,12 +15,15 @@
     </div>
     <div class="form-group col-md-2" style="margin-left:80px;">
         <a class="btn btn-dark" asp-page="YeniDava">
-            Dava Ekle
+            <i class="fa fa-plus" aria-hidden="true"></i> Dava Ekle
         </a>
     </div>
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-4">
         <form method="post">
-            <input class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export" />
+            <button class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
+                <i class="fa fa-download" aria-hidden="true"></i> Dosya Oluştur
+
+            </button>
         </form>
     </div>
 </div>
@@ -30,40 +33,39 @@
 @if (Model.Dava.Count() > 0)
 {
     <div class="overflow-auto">
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
+        <table class="table table-striped">
+            <thead style="background: #0e1a35;">
+                <tr style="color:white;">
                     <th class="h8">
                         Detay
                     </th>
                     <th class="h8">
                         <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaKayitNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter">
+                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
                             Dava Kayıt No
                         </a>
                     </th>
                     <th class="h8">
                         <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.EsasNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter">
+                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
                             Esas No
                         </a>
                     </th>
                     <th class="h8">
                         <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.YargitayDosyaNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter">
+                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
                             Yargıtay Dosya No
                         </a>
                     </th>
                     <th class="h8">
                         <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaTarihiSort"
-                           asp-route-currentFilter="@Model.CurrentFilter">
+                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
                             Dava Tarihi
                         </a>
                     </th>
                     <th class="h8">
                         <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.OlusturulmaTarihiSort"
-                           asp-route-currentFilter="@Model.CurrentFilter">
+                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
                             Oluşturulma Tarihi
                         </a>
                     </th>
@@ -85,7 +87,7 @@
                 <tr >
                     <td>
                         <a asp-page="Detay" asp-route-davaKayitNo="@item.DavaKayitNo"
-                           class="btn btn-outline-info h8">Detay</a>
+                           class="btn btn-dark btn-hover">Detay</a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DavaKayitNo)

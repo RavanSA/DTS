@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebApp1.Models
 {
-    public partial class HukukDTSContext : DbContext
+    public partial class HukukDTSContext : IdentityDbContext
     {
         public HukukDTSContext()
         {
@@ -32,6 +33,7 @@ namespace WebApp1.Models
         public virtual DbSet<ParaBirimi> ParaBirimi { get; set; }
         public virtual DbSet<Temyiz> Temyiz { get; set; }
         public virtual DbSet<YerelMahkemeKarari> YerelMahkemeKarari { get; set; }
+        public virtual DbSet<AppUsers> AppUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,6 +46,9 @@ namespace WebApp1.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.Entity<AktarTemyiz>(entity =>
             {
                 entity.HasNoKey();

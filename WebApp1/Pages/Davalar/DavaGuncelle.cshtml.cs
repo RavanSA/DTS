@@ -26,14 +26,15 @@ namespace WebApp1.Pages.Davalar
 
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int davaKayitNo)
         {
             if (ModelState.IsValid)
             {
                 _db.Attach(Dava).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("/Davalar/Index");
+                return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
+
             }
 
             return Page();

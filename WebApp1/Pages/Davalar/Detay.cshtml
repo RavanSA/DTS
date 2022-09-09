@@ -3,7 +3,8 @@
 @{
 }
 
-<div class="form-row">
+
+<div class="form-row" style="overflow-x:hidden;">
     <div class="form-group col-md-8">
         <h4>Dava Detayı</h4>
     </div>
@@ -13,17 +14,19 @@
 </div>
 
 
-<div class="border container case-summary-form" style="padding:30px;">
-    <div class="form-row case-summary-scroll">  
+<div class="border container new-case-table" style="padding:30px;">
+    <div class="form-row new-case-scroll">  
         <div class="form-group col-md-6">
-            <div class="border container ">
+            <div class="border container" style="width:100%">
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <h5>Dava Detayı</h5>
                     </div>
                     <div class="form-group col-md-2">
                         <h5>
-                            <a asp-page="DavaGuncelle" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
+                                <a asp-page="DavaGuncelle" asp-route-id="@Model.Dava.DavaKayitNo" style="text-decoration:none;color:white;" class="btn btn-dark btn-search"> 
+                                    Güncelle
+                                </a>
                         </h5>
                     </div>
                 </div>
@@ -32,7 +35,7 @@
                     string[] tokens = id.Split("=");
                     string davaID = tokens[1].ToString();
                 }
-                <table style="width:100%;table-layout: fixed;word-wrap: break-word;">
+                <table style="table-layout: fixed;word-wrap: break-word;width:70%;">
                     <tr>
                         <th>Dava Kayıt No:</th>
                         <td>@Model.Dava.DavaKayitNo</td>
@@ -184,21 +187,23 @@
             </div>
             </div>
         <div class="form-group col-md-6">
-            <div class="border container">
+            <div class="border container" style="width:100%">
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <h5>Yerel Mahkeme Kararı</h5>
                     </div>
                     <div class="form-group col-md-2">
                         <h5>
-                            <a asp-page="GuncelleYerelMahkemeKarari" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
-                        </h5>
+                                <a asp-page="GuncelleYerelMahkemeKarari" asp-route-id="@Model.Dava.DavaKayitNo" style="text-decoration:none;color:white;" class="btn btn-dark btn-search">
+                            Güncelle
+                                </a>
+                            </h5>
                     </div>
                 </div>
                 @{
                     if (@Model.YerelMahkemeKarari != null)
                     {
-                        <table class="case-summary-scroll" style="width:100%;table-layout:fixed; word-wrap: break-word;">
+                        <table class="case-summary-scroll" style="width:70%;table-layout:fixed; word-wrap: break-word;">
                             <tr>
                                 <th>Karar No:</th>
                                 <td>@Model.YerelMahkemeKarari.KararNo</td>
@@ -232,20 +237,22 @@
                     }
                 }
             </div><br />
-            <div class="border container">
+            <div class="border container" style="width:100%">
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <h5>Dava Sonucu</h5>
                     </div>
                     <div class="form-group col-md-2">
                         <h5>
-                            <a asp-page="DavaSonucu" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
-                        </h5>
+                                <a asp-page="DavaSonucu" asp-route-id="@Model.Dava.DavaKayitNo" style="text-decoration:none;color:white;" class="btn btn-dark btn-search">
+                            Güncelle
+                                </a>
+                            </h5>
                     </div>
                 </div>
                 @{ if (@Model.DavaSonucu != null)
                     {
-                        <table class="case-summary-scroll" style="width:100%;table-layout:fixed; word-wrap: break-word;">
+                        <table class="case-summary-scroll" style="width:70%;table-layout:fixed; word-wrap: break-word;">
                             <tr>
                                 <th>Karar No:</th>
                                 <td>@Model.DavaSonucu.KaldirmaNo</td>
@@ -307,15 +314,17 @@
                     }
                 }
             </div><br />
-            <div class="border container">
+            <div class="border container" style="width:100%">
                 <div class="form-row">
-                    <div class="form-group col-md-10">
+                    <div class="form-group col-md-10" >
                         <h5>Temyiz</h5>
                     </div>
                     <div class="form-group col-md-2">
                         <h5>
-                            <a asp-page="Temyiz" asp-route-id="@Model.Dava.DavaKayitNo">Güncelle</a>
-                        </h5>
+                            <a asp-page="Temyiz" asp-route-id="@Model.Dava.DavaKayitNo" style="text-decoration:none;color:white;" class="btn btn-dark btn-search">
+                            Güncelle
+                            </a>
+                            </h5>
                     </div>
                 </div>
                 @{ if (@Model.Temyiz != null)
@@ -360,17 +369,27 @@
                     }
                 }
             </div><br>
-                  <div class="border container">
+                  <div class="border container" style="width:100%">
+            <br />
                       <div class="form-row">
-                          <div class="form-group col-md-10">
+                          <div class="form-group col-md-3">
                               <h5>Dava Eki</h5>
                           </div>
-                          <div class="form-group col-md-2">
+                          <div class="form-group col-md-9">
                               <form method="post" enctype="multipart/form-data">
-                                  <input type="file" name="dosya" />
-                                  <input type="submit" id="btnUpload" value="Upload" asp-page-handler="UploadFile" />
-                                  <input asp-for="davaKayitNo" name="davaKayitNo" value="@davaID.ToString()"
-                                         type="hidden" class="form-control" />
+                                  <div class="from-row">
+                                      <div class="form-group col-md-6">
+                                          <label class="btn btn-dark btn-search">
+                                              Dosya Seç
+                                              <input type="file" name="dosya" style="display:none;" class="btn btn-dark btn-search" />
+                                      </label>
+                                              </div>
+                                      <div class="form-group col-md-6">
+                                          <input type="submit" id="btnUpload" value="Yükle" asp-page-handler="UploadFile" class="btn btn-dark btn-search" />
+                                          <input asp-for="davaKayitNo" name="davaKayitNo" value="@davaID.ToString()"
+                                                 type="hidden" class="form-control" />
+                                      </div>
+                                  </div>
                               </form>
                           </div>
                       </div>
@@ -386,9 +405,24 @@
                                       <tr>
                                           <td>Ek-@file.KayitNo</td>
                                           <td>
-                                              <a href="@Url.Page("Detay", "DownloadFile", new { dosyaId = file.KayitNo })">
-                                                  Yükle
-                                              </a>
+                                              <div class="form-row">
+                                                  <div class="form-group col-md-6">
+                                                      <button type="submit" class="btn btn-dark btn-search">
+                                                          <a href="@Url.Page("Detay", "DownloadFile", new { dosyaId = file.KayitNo })" style="text-decoration:none;color:white;">
+                                                              Yükle
+                                                          </a>
+                                                      </button>
+                                                  </div>
+                                                  <div class="form-group col-md-6">
+                                              <form method="post" asp-page-handler="DeleteFile"
+                                                           onclick="return confirm('Are you sure you want to delete this?')"
+                                                   >
+                                                  <input type="hidden" name="kayitNo" value="@file.KayitNo" />
+                                                  <input type="hidden" name="davaKayitNo" value="@file.DavaKayitNo" />
+                                                  <button type="submit" class="btn btn-dark btn-search">Sil</button>
+                                              </form>
+                                                      </div>
+                                                  </div>
                                           </td>
                                       </tr>
                                   }

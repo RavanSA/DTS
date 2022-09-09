@@ -26,26 +26,19 @@ namespace WebApp1.Pages.Davalar
             Karar = await _db.YerelMahkemeKarari.FindAsync(id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(int davaKayitNo)
         {
             if (ModelState.IsValid)
             {
-                //var KararDB = await _db.YerelMahkemeKarari.FindAsync(Karar.DavaKayitNo);
-
-
-                //KararDB.KararNo = Karar.KararNo;
-                //KararDB.KararTarihi = Karar.KararTarihi;
-                //KararDB.KararSonucu = Karar.KararSonucu;
-                //KararDB.KararOzeti = Karar.KararOzeti;
-                //await _db.YerelMahkemeKarari.AddAsync(Karar);
                 _db.Entry(Karar).State = !_db.YerelMahkemeKarari.Any(k => k.DavaKayitNo == Karar.DavaKayitNo) 
                     ? EntityState.Added : EntityState.Modified;
 
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("/Davalar/Index");
+                return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
 
-            } else
+            }
+            else
             {
                 return Page();
             }

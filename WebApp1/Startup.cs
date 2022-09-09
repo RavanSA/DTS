@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +30,13 @@ namespace WebApp1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HukukDTSContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<HukukDTSContext>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,13 +55,16 @@ namespace WebApp1
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
 
             app.UseStaticFiles(new StaticFileOptions
             {
                 ServeUnknownFileTypes = true,
                 DefaultContentType = "text/plain"
             });
+
+            app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

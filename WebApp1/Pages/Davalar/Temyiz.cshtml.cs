@@ -26,7 +26,7 @@ namespace WebApp1.Pages.Davalar
             Temyiz = await _db.Temyiz.FindAsync(id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(int davaKayitNo)
         {
               if(ModelState.IsValid)
             {
@@ -34,7 +34,7 @@ namespace WebApp1.Pages.Davalar
                     EntityState.Added : EntityState.Modified;
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("Index");
+                return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
             }
 
             return Page();

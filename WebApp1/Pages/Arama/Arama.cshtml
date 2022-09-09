@@ -3,8 +3,8 @@
 @{
 
 
-    <div class="border container" style="padding:30px;">
-        <div>
+    <div class="border container search-table" style="padding:30px;">
+        <div class="search-scroll">
             <form method="get">
 
                 <div class="form-row">
@@ -28,7 +28,7 @@
                     <div class="form-group col-md-3">
                         <label> </label>
 
-                        <input type="submit" value="Ara" class="btn btn-dark form-control"
+                        <input type="submit" value="Ara" class="btn btn-dark btn-search"
                                asp-route-ilkTarih="@Model.ilkTarih" asp-route-sonTarih="@Model.sonTarih"
                                asp-route-davaTurleri="@Model.davaTurleri" />
                     </div>
@@ -40,19 +40,16 @@
 
             @if (Model.isListEmpty)
             {
-                <div>
+                <div> 
                     @{ 
                         var ilk_tarih = Model.ilkTarih;
                         var son_tarih = Model.sonTarih;
                         var davaTurleri = Model.davaTurleri;
                     }
-                    <h3>@Model.ilkTarih @Model.sonTarih @Model.davaTurleri</h3>
                     <table class="table table-bordered">
-                        <thead>
+                        <thead style="background: #0e1a35;">
                             <tr>
-                                <th>
-                                    <input type="checkbox" name="todo" />&nbsp;
-                                </th>
+                                
                                 <th class="h8">
                                     Detay
                                 </th>
@@ -97,12 +94,10 @@
                             @foreach (var item in Model.Dava)
                             {
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="todo" />&nbsp;
-                                    </td>
+                                    
                                     <td>
                                         <a asp-page="/Davalar/Detay" asp-route-davaKayitNo="@item.DavaKayitNo"
-                                           class="btn btn-outline-info h8">Detay</a>
+                                           class="btn btn-dark h8">Detay</a>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.DavaKayitNo)

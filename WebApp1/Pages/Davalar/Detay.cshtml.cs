@@ -82,7 +82,19 @@ namespace WebApp1.Pages.Davalar
                 _db.SaveChanges();
             }
 
-            return RedirectToPage("Index"); 
+            return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
+        }
+
+        public IActionResult OnPostDeleteFile(int kayitNo, int davaKayitNo)
+        {
+            var files = _db.DavaEki.Find(kayitNo);
+            _db.DavaEki.Remove(files);
+            _db.SaveChanges();
+
+            return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
+            //return RedirectToPage("Index");
+
+
         }
 
         public FileResult OnGetDownloadFile(int dosyaId)
@@ -110,10 +122,12 @@ namespace WebApp1.Pages.Davalar
             else if (dosyaTuru == "text/plain")
             {
                 fileExtension = ".txt";
-            } else if (dosyaTuru == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            }
+            else if (dosyaTuru == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
             {
                 fileExtension = ".doc";
-            } else if ( dosyaTuru == "application/pdf")
+            }
+            else if ( dosyaTuru == "application/pdf")
             {
                 fileExtension = ".pdf";
             }

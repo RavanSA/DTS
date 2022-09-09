@@ -80,7 +80,7 @@ namespace WebApp1.Pages.Davalar
 
             switch (sortOrder)
             {
-                case "dava_kayit_asc":
+                case "dava_kayit_asc": 
                     davaIQ = davaIQ.OrderBy(s => s.DavaKayitNo);
                     break;
                 case "temyiz_durumu":
@@ -196,8 +196,7 @@ namespace WebApp1.Pages.Davalar
                     dava.KararOzeti,
                     dava.TemyizEden,
                     dava.TemyizTarihi,
-                    dava.TemyizSonucu,
-                    dava.TemyizAciklamasi,
+                     dava.TemyizAciklamasi,
                     dava.SonucTarihi,
                     dava.KaldirmaNo,
                     dava.DavaSonucu,

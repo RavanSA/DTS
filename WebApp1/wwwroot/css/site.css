@@ -1,14 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+/*a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-}
+}*/
 
 /* Provide sufficient contrast against white background */
-a {
+/*a {
   color: blue;
 }
 
@@ -22,11 +22,11 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
-}
+}*/
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+/*html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
@@ -49,14 +49,14 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
+}*/
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+/*html {
   position: relative;
   min-height: 100%;
-}
+}*/
 
 /*body {*/
   /* Margin bottom by footer height */
@@ -72,11 +72,12 @@ html {
 
 
 
-.sidenav {
-    height: 100%;
+/*.sidenav {
+    min-height: 100%;
     background: #11304a;
     text-align: center;
     color: #fff;
+    position: relative;
 }
 
 .sidenav-text-color {
@@ -88,13 +89,13 @@ html {
 }
 
 .search-table {
-    width: 10%;
+        width: 10%;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-}
+}*/
 
     /* When the input field gets focus, change its width to 100% */
-.search-table:focus {
+/*.search-table:focus {
     width: 50%;
 }
 
@@ -154,4 +155,4 @@ html {
 .h10 {
     color: #111111;
     font-size: 14px;
-}
+}*/

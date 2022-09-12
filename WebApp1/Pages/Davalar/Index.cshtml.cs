@@ -12,13 +12,18 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using ClosedXML.Excel;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp1.Pages.Davalar
 {
+    //[Authorize]
     public class IndexModel : PageModel
     {
         private readonly HukukDTSContext _db;
         private readonly IConfiguration _configuration;
+        private readonly UserManager<IdentityUser> _userManager;
+
         public IndexModel(HukukDTSContext db, IConfiguration configuration)
         {
             _db = db;
@@ -32,15 +37,23 @@ namespace WebApp1.Pages.Davalar
         public string OlusturulmaTarihiSort { get; set; }
         public string KararNoSort { get; set; }
         public string TemyizDurumuSort{ get; set; }
-
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
         public PaginatedList<WebApp1.Models.DavaListeleri> Dava{ get; set; }
             
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, 
+        public async Task<IActionResult> OnGetAsync(string sortOrder, string currentFilter, 
             string searchString, int? pageIndex) {
+
+            //var user = await _userManager.FindByEmailAsync();
+            //var roles = await _userManager.GetRolesAsync(user);
+
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
 
             CurrentSort = sortOrder;
 
@@ -116,6 +129,7 @@ namespace WebApp1.Pages.Davalar
 
             Dava = await PaginatedList<DavaListeleri>.CreateAsync(davaIQ.AsNoTracking(),
                 pageIndex ?? 1, pageSize);
+            return Page();
         }
 
         public FileResult OnPostExport()

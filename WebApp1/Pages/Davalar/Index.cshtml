@@ -1,5 +1,6 @@
 ﻿@page "/"
 @model WebApp1.Pages.Davalar.IndexModel
+@using WebApp1.Models
 @{
 }
 
@@ -18,15 +19,19 @@
             <i class="fa fa-plus" aria-hidden="true"></i> Dava Ekle
         </a>
     </div>
-    <div class="form-group col-md-4">
-        <form method="post">
-            <button class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
-                <i class="fa fa-download" aria-hidden="true"></i> Dosya Oluştur
+    @if (User.IsInRole(Roles.Role_Admin))
+    {
+        <div class="form-group col-md-4">
+            <form method="post">
 
-            </button>
-        </form>
+                <button class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
+                    <i class="fa fa-download" aria-hidden="true"></i> Dosya Oluştur
+                </button>
+                
+            </form>
+        </div>
+    }
     </div>
-</div>
 
 <br />
 

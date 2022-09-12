@@ -1,5 +1,6 @@
 ﻿@page
 @model WebApp1.Pages.Davalar.DetayModel
+@using WebApp1.Models 
 @{
 }
 
@@ -419,7 +420,10 @@
                                                    >
                                                   <input type="hidden" name="kayitNo" value="@file.KayitNo" />
                                                   <input type="hidden" name="davaKayitNo" value="@file.DavaKayitNo" />
+                                                  @if (User.IsInRole(Roles.Role_Admin))
+                                                  {
                                                   <button type="submit" class="btn btn-dark btn-search">Sil</button>
+                                                  }
                                               </form>
                                                       </div>
                                                   </div>

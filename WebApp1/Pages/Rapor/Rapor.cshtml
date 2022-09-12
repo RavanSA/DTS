@@ -1,5 +1,6 @@
 ﻿@page
 @model WebApp1.Pages.Rapor.RaporModel
+@using WebApp1.Models 
 @{
 
     string[] OZET_TABLO = new string[] {"SIRA_NO"
@@ -11,7 +12,8 @@
 
 }
 
-
+@if (User.IsInRole(Roles.Role_Admin))
+{
 <div class="border container new-case-table" style="padding:30px;">
     <div class="new-case-scroll">
         <form method="get">
@@ -67,11 +69,11 @@
                 @if (Model != null)
                 {
 
-                foreach (var Data in Model.rapor)
-                {
+                    foreach (var Data in Model.rapor)
+                    {
 
-                if (Model.rapor.First() == Data)
-                {
+                        if (Model.rapor.First() == Data)
+                        {
 
             <div class="form-row">
                 <div class="form-group col-md-9">
@@ -86,9 +88,9 @@
                     </form>
                 </div>
             </div>
-                }
-                else if (Model.rapor.First() != Data)
-                {
+                        }
+                        else if (Model.rapor.First() != Data)
+                        {
 
                 <tbody class="h10">
 
@@ -108,10 +110,10 @@
                 </tbody>
 
 
-                }
+                        }
 
 
-                }
+                    }
                 }
 
 
@@ -121,4 +123,9 @@
 
         }
     </div>
-</div>  n
+</div>  
+}
+else
+{
+   <h1>Yetki Yok</h1>
+}

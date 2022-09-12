@@ -1,77 +1,143 @@
 ﻿@page
 @model RegisterModel
+@using WebApp1.Models
 @{
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
+@if (User.IsInRole(Roles.Role_Admin))
+{
+
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <h4>Yeni Kullanıcı Oluştur</h4>
+        </div>
+        
+    </div>
+
+    <div class="border container" style="padding:30px;">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
+
+            <center>
+                <div class="form-row">
+                    <div class="form-group col-md-12 txt-center">
+                        <h4>Yeni Kullanıcı Oluştur</h4>
+                    </div>
+                </div>
+            </center>
+
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.Email">Email</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                
             </div>
-            <div class="form-group">
-                <label asp-for="Input.UserName"></label>
-                <input asp-for="Input.UserName" class="form-control" />
-                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.UserName"> Kullanıcı İsmi</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.UserName" class="form-control" />
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.UserDuty"> Kullanıcı Görevi</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.UserDuty" class="form-control" />
+                    <span asp-validation-for="Input.UserDuty" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.PhoneNumber"> Telefon Numarası</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.Password">Şifre</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+              
             </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.ConfirmPassword"> Tekrar Şifre</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                </div>
+               
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Input.Role">Kullanıcı Tipi</label>
+                </div>
+                <div class="col-4">
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control">
+                        <option disabled selected> Roles </option>
+                    </select>
+                </div>
+                
+            </div>
+
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+        </div>
+        @*<div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
                         <div>
                             <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
                             </p>
                         </div>
-                    </form>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
                 }
-            }
-        </section>
-    </div>
-</div>
-
+            </section>
+        </div>*@
+}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

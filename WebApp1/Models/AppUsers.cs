@@ -10,7 +10,7 @@ namespace WebApp1.Models
     public class AppUsers : IdentityUser
     {
         [Required]
-        public string UserName { get; set; }
+        public string UserFullName { get; set; }
         [Required]
         public string UserDuty { get; set; }
 

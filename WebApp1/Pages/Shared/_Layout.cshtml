@@ -15,7 +15,7 @@
 </head>
 
 
-<body class="home" style="overflow-x: hidden; height:100vh;">
+<body class="home" style="overflow-x: hidden;height: 100vh;overflow-y: hidden;">
     <div class="display-table" style="overflow-y:hidden;">
         <div class="row display-table-row">
             <div >
@@ -25,22 +25,20 @@
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a asp-area="" asp-page="/Davalar/Index"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Tüm Davalar</span></a></li>
+                        <li class="active"><a asp-area="" asp-page="/Davalar/Index"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Tüm Davalar</span></a></li>
                         @if (User.IsInRole(Roles.Role_Admin))
                         {
-                            <li class="active"><a asp-area="" asp-page="/Arama/Arama"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Arama</span></a></li>
-                            <li class="active"><a asp-area="" asp-page="/Rapor/Rapor"><i class="fa fa-file" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Rapor</span></a></li>
+                            <li class="active"><a asp-area="" asp-page="/Arama/Arama"><i class="fa fa-fw fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Arama</span></a></li>
+                            <li class="active"><a asp-area="" asp-page="/Rapor/Rapor"><i class="fa fa-fw fa-file" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Rapor</span></a></li>
                             <div class="dropdown">
-                                <li class="active dropbtn"><a asp-area="" asp-page="/Rapor/Rapor"><i class="fa fa-cog" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Ayarlar</span></a></li>
+                                <li class="active dropbtn"><a style="color:white;"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Ayarlar</span></a></li>
                                 <div class="dropdown-content">
                                     <a id="register" asp-area="Identity" asp-page="/Account/Register">Kullanıcı Oluştur</a>
-                                    <a href="#">Kullanıcıları görüntüle</a>
+                                    <a asp-area="" asp-page="/Davalar/Kullanicilar">Kullanıcıları görüntüle</a>
                                 </div>
                             </div>
-                        
                             
                             }
-
                     </ul>
                     <div class="sidebar-footer">
                         <partial name="_LoginPartial" />

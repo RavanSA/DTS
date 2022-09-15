@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -14,6 +15,7 @@ using WebApp1.Models;
 
 namespace WebApp1.Pages.Rapor
 {
+    [Authorize]
     public class RaporModel : PageModel
     {
         private readonly IConfiguration _configuration;

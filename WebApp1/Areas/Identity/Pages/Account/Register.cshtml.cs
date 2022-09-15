@@ -19,7 +19,7 @@ using WebApp1.Models;
 
 namespace WebApp1.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -122,7 +122,6 @@ namespace WebApp1.Areas.Identity.Pages.Account
                 user.UserFullName = Input.UserName;
                 user.UserName = Input.Email;
                 user.UserDuty = Input.UserDuty;
-
                 //var user = new IdentityUser {
                 //    UserName = Input.UserName,
                 //    Email = Input.Email,

@@ -9,6 +9,7 @@ using WebApp1.Models;
     
 namespace WebApp1.Pages.Davalar
 {
+    [Authorize]
     public class YeniDavaModel : PageModel
     {
 

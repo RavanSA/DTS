@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace WebApp1.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize]
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

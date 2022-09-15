@@ -1,48 +1,40 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp1.Models;
 
-namespace WebApp1.Areas.Identity.Pages.Account.Manage
+namespace WebApp1.Pages.Davalar
 {
-    public partial class IndexModel : PageModel
+    public class KullaniciBilgileriModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly HukukDTSContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            HukukDTSContext context,
-            IHttpContextAccessor httpContextAccessor )
+        public KullaniciBilgileriModel(UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            HukukDTSContext context)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+            _roleManager = roleManager;
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
         }
-
-        public string Username { get; set; }
-
-        [TempData]
-        public string StatusMessage { get; set; }
 
         public AppUsers users { get; set; }
 
         [BindProperty]
-        public InputModel input { get; set; }
+        public EditInputModel input { get; set; }
 
-        public class InputModel
+        public class EditInputModel
         {
+
             [Required]
             [Display(Name = "Username")]
             public string UserFullName { get; set; }
@@ -66,41 +58,38 @@ namespace WebApp1.Areas.Identity.Pages.Account.Manage
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            public string Role { get; set; }
+
+            [ValidateNever]
+            public IEnumerable<SelectListItem> RoleList { get; set; }
+
         }
 
-       
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string userId)
         {
-            var userId = _httpContextAccessor.HttpContext
-                .User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
             users = await _context.AppUsers.FindAsync(userId);
             return Page();
-
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync(string userId)
         {
-            var userId = _httpContextAccessor.HttpContext
-               .User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
             users = await _context.AppUsers.FindAsync(userId);
             var userPassword = users.PasswordHash;
-            if (!ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return Page();
             }
             users.UserFullName = input.UserFullName;
             users.PhoneNumber = input.PhoneNumber;
             users.UserDuty = input.UserDuty;
-            if (userPassword != input.Password)
+            if(userPassword != input.Password)
             {
-                users.PasswordHash = _userManager.PasswordHasher.HashPassword(users, input.Password);
+            users.PasswordHash = _userManager.PasswordHasher.HashPassword(users, input.Password);
             }
 
             await _context.SaveChangesAsync();
-            return Page();
+            return RedirectToPage("/Davalar/Kullanicilar");
         }
     }
 }

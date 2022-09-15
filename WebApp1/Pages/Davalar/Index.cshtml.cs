@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp1.Pages.Davalar
 {
-    //[Authorize]
     public class IndexModel : PageModel
     {
         private readonly HukukDTSContext _db;

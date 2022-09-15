@@ -16,7 +16,6 @@ using Microsoft.Extensions.Logging;
 
 namespace WebApp1.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

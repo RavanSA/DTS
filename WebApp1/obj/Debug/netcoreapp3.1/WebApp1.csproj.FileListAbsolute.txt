@@ -478,3 +478,5 @@ C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Areas
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\Kullanicilar.cshtml.g.cs
+C:\Users\Lenovo\source\repos\WebApp1\WebApp1\obj\Debug\netcoreapp3.1\Razor\Pages\Davalar\KullaniciBilgileri.cshtml.g.cs

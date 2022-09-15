@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,6 +12,7 @@ using WebApp1.Models;
 
 namespace WebApp1.Pages.Davalar
 {
+    [Authorize]
     public class DetayModel : PageModel
     {
         public readonly HukukDTSContext _db;

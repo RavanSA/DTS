@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WebApp1.Models;
 
 namespace WebApp1.Areas.Identity.Pages.Account
 {
@@ -19,15 +20,18 @@ namespace WebApp1.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly HukukDTSContext _context;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
+            HukukDTSContext context,
             UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -82,8 +86,22 @@ namespace WebApp1.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    var userInfo = await _signInManager.UserManager.FindByNameAsync(Input.Email);
+                    var roles = await _signInManager.UserManager.GetRolesAsync(userInfo);
+                        
+                    var signInLogInfo = new LogTable
+                    {
+                        UserId = userInfo.Id,
+                        UserEmail = userInfo.UserName,
+                        LogTuru = "LOGIN",
+                        LogDate = DateTime.Now,
+                        Aciklama = $"{userInfo.UserName} isimli kullanıcı {DateTime.Now} tarihinde sisteme giriş yaptı, Rol: {roles[0]}"
+                    };
+                    
+                    await _context.LogTable.AddAsync(signInLogInfo);
+                    await _context.SaveChangesAsync();
                     return LocalRedirect(returnUrl);
+
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WebApp1.Models;
 
 namespace WebApp1.Areas.Identity.Pages.Account
 {
@@ -14,11 +15,20 @@ namespace WebApp1.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
+        private readonly HukukDTSContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(
+            SignInManager<IdentityUser> signInManager,
+            ILogger<LogoutModel> logger,
+            UserManager<IdentityUser> userManager,
+            HukukDTSContext context
+            )
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
+            _context = context;
         }
 
         public void OnGet()
@@ -28,10 +38,25 @@ namespace WebApp1.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
 
+                    var userInfo = await _userManager.GetUserAsync(User);
+                    var roles = await _userManager.GetRolesAsync(userInfo);
+
+                    var yeniDava = new LogTable
+                    {
+                        UserId = userInfo.Id,
+                        UserEmail = userInfo.UserName,
+                        LogTuru = "LOGOUT",
+                        LogDate = DateTime.Now,
+                        Aciklama = $"{userInfo.UserName} isimli kullanıcı {DateTime.Now} tarihinde sistemden çıkış yaptı, Rol: {roles[0]}"
+                    };
+
+                    await _context.LogTable.AddAsync(yeniDava);
+                    await _context.SaveChangesAsync();
+  
             return RedirectToPage("Login");
            
         }
+
     }
 }

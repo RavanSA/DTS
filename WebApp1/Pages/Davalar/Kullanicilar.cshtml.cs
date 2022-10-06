@@ -38,8 +38,8 @@ namespace WebApp1.Pages.Davalar
         }
 
         public IQueryable<Users_in_Role_ViewModel> userWithRoles = null;
-
-        public async Task<IActionResult> OnGetAsync()
+            
+        public async Task<IActionResult> OnGetAsync()   
         {
 
             userWithRoles =  from user in _context.AppUsers

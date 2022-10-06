@@ -1,0 +1,159 @@
+﻿@page
+@model WebApp1.Pages.Davalar.LogModel
+@using WebApp1.Models
+@{
+}
+
+
+@if (User.IsInRole(Roles.Role_Admin))
+{
+    <div class="border container search-table" style="padding:30px;">
+        <div class="search-scroll">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="width:80%">
+                                    <span><b>Log Sayfası</b></span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span>
+                                        <form method="post" asp-page="/Davalar/Log" asp-page-handler="DownloadLogFile">
+                                            <button class="btn btn-default btn-sx" type="submit">
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <form asp-page="/Davalar/Log" method="get">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>İlk Tarih</label>
+                                <input type="date" id="ilkTarih" value="@Model.ILKTARIH"
+                                       name="ilkTarih" class="form-control"
+                                       required />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Son Tarih</label>
+                                <input type="date" id="sonTarih" value="@Model.SONTARIH"
+                                       name="sonTarih"
+                                       class="form-control" required />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label> </label>
+
+                                <input type="submit" value="Ara" class="btn btn-dark btn-search"
+                                       asp-route-ilkTarih="@Model.ILKTARIH" asp-route-sonTarih="@Model.SONTARIH" />
+                            </div>
+
+                        </div>
+                        <br />
+
+                    </form>
+                </div>
+                <div class="panel-heading">
+
+                    <div class="overflow-auto">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="h8">
+                                        Email
+                                    </th>
+                                    <th class="h8">
+                                        Log Türü
+                                    </th>
+                                    <th class="h8">
+                                        Açıklama
+                                    </th>
+                                    <th class="h8">
+                                        Tarih
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="h10" style="font-size:11px;">
+                                @foreach (var log in Model.logPagination)   
+                                {
+                                    <tr>
+                                        <td>
+                                            @log.UserEmail
+                                        </td>
+                                        <td>
+                                            @log.LogTuru
+                                        </td>
+                                        <td>
+                                            @log.Aciklama
+                                        </td>
+                                        <td>
+                                            @log.LogDate
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                        @{
+                            var prevDisabled = !Model.logPagination.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.logPagination.HasNextPage ? "disabled" : "";
+                        }
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    
+        var sonTarih = "";
+        var ilkTarih = "";
+        var id = Request.QueryString.ToString();
+        string[] tarih = id.Split("&");
+        if (tarih.Length == 2)
+        {
+            string[] test = id.Split("=");
+            string[] ilkTarihArr = test[1].Split("&");
+            ilkTarih = ilkTarihArr[0];
+            sonTarih = test[2];
+        }
+        else if (tarih.Length == 3)
+        {
+            string[] ilkTarihArr = tarih[1].Split("=");
+            ilkTarih = ilkTarihArr[1];
+            string[] sonTarihArr = tarih[2].Split("=");
+            sonTarih = sonTarihArr[1];
+        }
+
+    <a asp-page="/Davalar/Log"
+       asp-route-pageIndex="@(Model.logPagination.PageIndex - 1)"
+       asp-route-ilkTarih="@ilkTarih"
+       asp-route-sonTarih='@sonTarih'
+       class="btn btn-default btn-xs @prevDisabled">
+        Geri
+    </a>
+
+    <a asp-page="/Davalar/Log"
+       asp-route-pageIndex="@(Model.logPagination.PageIndex + 1)"
+       asp-route-ilkTarih='@ilkTarih'
+       asp-route-sonTarih='@sonTarih'
+       class="btn btn-default btn-xs @nextDisabled">
+        İleri
+    </a>
+}
+else
+{
+    <h1> Yetki Yok</h1>
+}

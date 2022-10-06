@@ -1,6 +1,7 @@
 ﻿@page
 @model WebApp1.Pages.Rapor.RaporModel
 @using WebApp1.Models 
+    
 @{
 
     string[] OZET_TABLO = new string[] {"SIRA_NO"
@@ -14,45 +15,88 @@
 
 @if (User.IsInRole(Roles.Role_Admin))
 {
-<div class="border container new-case-table" style="padding:30px;">
-    <div class="new-case-scroll">
-        <form method="get">
-
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    @*<label asp-for="Rapor.ilk_tarih">İlk Tarih</label>*@
-                    <input type="date" asp-for="ilkTarih" value="@Model.ilkTarih" name="ilkTarih" class="form-control" />
-                </div>
-                <div class="form-group col-md-3">
-                    @*<label asp-for="Rapor.son_tarih">Son Tarih</label>*@
-                    <input type="date" value="@Model.sonTarih" asp-for="sonTarih" name="sonTarih" class="form-control" />
-                </div>
-                <div class="form-group col-md-3">
-                    @*<label asp-for="Rapor.lehte">Lehte</label>*@
-                    <select class="form-control" value="@Model.lehte" name="lehte">
-                        <option value="true" selected>Lehte</option>
-                        <option value="false">Aleyhte</option>
-                    </select>
-
-                </div>
-  
-                <div class="form-group col-md-3">
-                    <input type="submit" value="Raporla" class="btn btn-dark btn-search"
-                           asp-route-ilkTarih="@Model.ilkTarih" asp-route-sonTarih="@Model.sonTarih"
-                           asp-route-lehte="@Model.lehte"  asp-page-handler="DownloadCSV" />
-                </div>
+<div class="border container rapor-table">
+    <div class="rapor-scroll">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <table style="width:100%">
+                    <tbody>
+                        <tr>
+                            <td style="width:80%">
+                                <span><b>Rapor</b></span>
+                            </td>
+                            <td style="text-align:right;">
+                                <span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <br />
+            <div class="panel-heading">
+                <table style="width:100%">
+                    <tbody>
+                        <form method="get">
 
-        </form>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label>İlk Tarih</label>
+                                    <input type="date" value="@Model.ilkTarih" name="ilkTarih" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Son Tarih</label>
+                                    <input type="date" value="@Model.sonTarih" name="sonTarih" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Tür</label>
+                                    <select class="form-control" value="@Model.lehte" name="lehte">
+                                        <option value="true" selected>Lehte</option>
+                                        <option value="false">Aleyhte</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <br />
+                                    <input type="submit" value="Raporla" class="btn btn-default btn-xs" style="width:100%; font-size:18px;"
+                                           asp-route-ilkTarih="@Model.ilkTarih" asp-route-sonTarih="@Model.sonTarih"
+                                           asp-route-lehte="@Model.lehte" asp-page-handler="DownloadCSV" />
+                                </div>
+                            </div>
+                            <br />
+                        </form>
+                    </tbody>
+                </table>
+            </div>
 
-        @if (Model.rapor.Count() > 0)
-        {
 
+            @if (Model.rapor.Count() > 0)
+            {
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="width:80%">
+                                    <span><b>@Model.rapor[0].TANIM</b></span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span>
+                                        <form method="post">
+                                            <input type="hidden" asp-for="@Model.ilkTarih" />
+                                            <input type="hidden" asp-for="@Model.sonTarih" />
+                                            <input type="hidden" asp-for="@Model.lehte" />                                        
+                                        <button type="submit" class="btn btn-default btn-xs" asp-page-handler="DownloadCSV" >
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                        </form>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
             <table class="table table-bordered">
-
-                <tr>
+                <tr style="visibility:visible;">
                     <th>
                         Tanım
                     </th>
@@ -63,66 +107,35 @@
                         Değer
                     </th>
                 </tr>
-
-
-
-                @if (Model != null)
+                @if (Model.rapor.Count() > 0)
                 {
-
-                    foreach (var Data in Model.rapor)
+                    @if (Model != null)
                     {
-
-                        if (Model.rapor.First() == Data)
+                        @foreach (var Data in Model.rapor)
                         {
 
-            <div class="form-row">
-                <div class="form-group col-md-9">
-                    <h3> @Data.TANIM</h3>
-                </div>
-                <div class="form-group col-md-3">
-                    <form method="post">
-                        <input type="hidden" asp-for="@Model.ilkTarih" />
-                        <input type="hidden" asp-for="@Model.sonTarih" />
-                        <input type="hidden" asp-for="@Model.lehte" />          
-                         <input type="submit" class="btn btn-dark btn-search" value="Dosya Oluştur" asp-page-handler="DownloadCSV" />
-                    </form>
-                </div>
-            </div>
+                            @if (Model.rapor.First() != Data)
+                            {
+                                <tbody style="font-size:11px;">
+                                    <tr>
+                                        <td>
+                                            @Data.TANIM
+                                        </td>
+                                        <td>
+                                            @Data.SAYI
+                                        </td>
+                                        <td>
+                                            @Data.DEGER
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
                         }
-                        else if (Model.rapor.First() != Data)
-                        {
-
-                <tbody class="h10">
-
-
-                    <tr>
-                        <td>
-                            @Data.TANIM
-                        </td>
-                        <td>
-                            @Data.SAYI
-                        </td>
-                        <td>
-                            @Data.DEGER
-                        </td>
-                    </tr>
-
-                </tbody>
-
-
-                        }
-
-
                     }
                 }
-
-
-
-
             </table>
-
-        }
-    </div>
+        </div>
+  </div>
 </div>  
 }
 else

@@ -25,7 +25,7 @@
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a asp-area="" asp-page="/Davalar/Index"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Tüm Davalar</span></a></li>
+                        <li class="active"><a asp-area="" asp-page="/Davalar/Index"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Davalar</span></a></li>
                         @if (User.IsInRole(Roles.Role_Admin))
                         {
                             <li class="active"><a asp-area="" asp-page="/Arama/Arama"><i class="fa fa-fw fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Arama</span></a></li>
@@ -35,9 +35,9 @@
                                 <div class="dropdown-content">
                                     <a id="register" asp-area="Identity" asp-page="/Account/Register">Kullanıcı Oluştur</a>
                                     <a asp-area="" asp-page="/Davalar/Kullanicilar">Kullanıcıları görüntüle</a>
+                                    <a asp-area="" asp-page="/Davalar/Log"> Log </a>
                                 </div>
                             </div>
-                            
                             }
                     </ul>
                     <div class="sidebar-footer">
@@ -50,9 +50,7 @@
                 <div class="row">
                    
                 </div>
-                <div class="user-dashboard" style="width:100%;">
-                    <br />
-                    <br />
+                <div class="user-dashboard" style="width:100%;padding-top:0px;padding-left:0px;">
                     @RenderBody()
                 </div>
             </div>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,12 @@ namespace WebApp1.Pages.Davalar
     public class DetayModel : PageModel
     {
         public readonly HukukDTSContext _db;
+        public readonly UserManager<IdentityUser> _userManager;
 
-        public DetayModel(HukukDTSContext db)
+        public DetayModel(HukukDTSContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -41,7 +44,22 @@ namespace WebApp1.Pages.Davalar
        
         public async Task<IActionResult> OnGetAsync(int? davaKayitNo)
         {
-            
+
+
+            //var userInfo = await _userManager.GetUserAsync(User);
+            //var roles = await _userManager.GetRolesAsync(userInfo);
+
+            //var davaDetay = new LogTable
+            //{
+            //    UserId = userInfo.Id,
+            //    UserEmail = userInfo.UserName,
+            //    LogTuru = "DAVA DETAYÝ",
+            //    LogDate = DateTime.Now,
+            //    Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde {davaKayitNo} nolu dosyayý inceledi, Rol: {roles[0]}"
+            //};
+
+            //await _db.LogTable.AddAsync(davaDetay);
+            //await _db.SaveChangesAsync();
 
             var dava = await _db.Dava.FirstOrDefaultAsync( d => d.DavaKayitNo == davaKayitNo);
             var mahkemeKarari = await _db.YerelMahkemeKarari.FirstOrDefaultAsync(d => d.DavaKayitNo == davaKayitNo);
@@ -62,12 +80,27 @@ namespace WebApp1.Pages.Davalar
         }
 
 
-        public IActionResult OnPostUploadFile(IFormFile dosya)
+        public async Task<IActionResult> OnPostUploadFile(IFormFile dosya)
         {
+            
             //var dosya = Request.Form["davaEki"];
             var davaKayitNo = Int32.Parse(Request.Form["davaKayitNo"]);
             string dosyaAdi = Path.GetFileName(dosya.FileName);
             string dosyaTuru = dosya.ContentType;
+
+            
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+
+            var davaDetay = new LogTable
+            {
+                UserId = userInfo.Id,
+                UserEmail = userInfo.UserName,
+                LogTuru = "DAVA EKÝ YUKLENDÝ",
+                LogDate = DateTime.Now,
+                Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde" +
+                $" {davaKayitNo} nolu davanýn ekini yukledi, Rol: {roles[0]}"
+            };
 
             using (MemoryStream stream = new MemoryStream())
             {
@@ -80,26 +113,42 @@ namespace WebApp1.Pages.Davalar
                     Ek = stream.ToArray(),
                 };
 
+
                 _db.Entry(davaEki).State = EntityState.Added;
-                _db.SaveChanges();
+                await _db.LogTable.AddAsync(davaDetay);
+               await _db.SaveChangesAsync();
             }
 
             return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
         }
 
-        public IActionResult OnPostDeleteFile(int kayitNo, int davaKayitNo)
+        public async Task<IActionResult> OnPostDeleteFile(int kayitNo, int davaKayitNo)
         {
+
             var files = _db.DavaEki.Find(kayitNo);
+
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+
+            var davaDetay = new LogTable
+            {
+                UserId = userInfo.Id,
+                UserEmail = userInfo.UserName,
+                LogTuru = "DAVA EKÝ SÝLME",
+                LogDate = DateTime.Now,
+                Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde" +
+                $" {davaKayitNo} nolu davanýn {kayitNo} nolu ekini sildi, Rol: {roles[0]}"
+            };
+
+
+            await _db.LogTable.AddAsync(davaDetay);
             _db.DavaEki.Remove(files);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });
-            //return RedirectToPage("Index");
-
-
         }
 
-        public FileResult OnGetDownloadFile(int dosyaId)
+        public async Task<FileResult> OnGetDownloadFile(int dosyaId)
         {
 
             var davaEki =  _db.DavaEki.Find(dosyaId);
@@ -137,7 +186,24 @@ namespace WebApp1.Pages.Davalar
             string utcNow = System.DateTime.Now.ToString();
 
 
-                return File(ek, dosyaTuru, $"EK-{dosyaId}-{utcNow}{fileExtension}");
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+
+            var davaDetay = new LogTable
+            {
+                UserId = userInfo.Id,
+                UserEmail = userInfo.UserName,
+                LogTuru = "DAVA EKI INDIRILDI",
+                LogDate = DateTime.Now,
+                Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde" +
+                $" {davaKayitNo} nolu davanýn {dosyaId} nolu ekini indirdi, Rol: {roles[0]}"
+            };
+
+
+            await _db.LogTable.AddAsync(davaDetay);
+
+
+            return File(ek, dosyaTuru, $"EK-{dosyaId}-{utcNow}{fileExtension}");
         }
     }
 }

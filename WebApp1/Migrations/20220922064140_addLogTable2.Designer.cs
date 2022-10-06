@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp1.Models;
 
 namespace WebApp1.Migrations
 {
     [DbContext(typeof(HukukDTSContext))]
-    partial class HukukDTSContextModelSnapshot : ModelSnapshot
+    [Migration("20220922064140_addLogTable2")]
+    partial class addLogTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -490,7 +492,6 @@ namespace WebApp1.Migrations
             modelBuilder.Entity("WebApp1.Models.DavaSonucu", b =>
                 {
                     b.Property<int>("DavaKayitNo")
-                        .IsConcurrencyToken()
                         .HasColumnName("Dava_KayitNo")
                         .HasColumnType("int");
 
@@ -529,13 +530,7 @@ namespace WebApp1.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("SonucTarihi")
-                        .IsConcurrencyToken()
                         .HasColumnType("datetime");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.Property<double?>("VekaletUcretleri")
                         .HasColumnType("float");
@@ -868,32 +863,6 @@ namespace WebApp1.Migrations
                     b.ToTable("KolonIsimleri");
                 });
 
-            modelBuilder.Entity("WebApp1.Models.LogTable", b =>
-                {
-                    b.Property<Guid>("LogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LogDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LogTuru")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LogId");
-
-                    b.ToTable("LogTable");
-                });
-
             modelBuilder.Entity("WebApp1.Models.ParaBirimi", b =>
                 {
                     b.Property<int>("KayitNo")
@@ -923,7 +892,6 @@ namespace WebApp1.Migrations
             modelBuilder.Entity("WebApp1.Models.Temyiz", b =>
                 {
                     b.Property<int>("DavaKayitNo")
-                        .IsConcurrencyToken()
                         .HasColumnName("Dava_KayitNo")
                         .HasColumnType("int");
 
@@ -934,7 +902,6 @@ namespace WebApp1.Migrations
                         .IsUnicode(false);
 
                     b.Property<bool?>("TemyizEdenPetkim")
-                        .IsConcurrencyToken()
                         .HasColumnType("bit");
 
                     b.Property<bool?>("TemyizSonucu")
@@ -942,11 +909,6 @@ namespace WebApp1.Migrations
 
                     b.Property<DateTime?>("TemyizTarihi")
                         .HasColumnType("datetime");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.HasKey("DavaKayitNo");
 
@@ -956,12 +918,10 @@ namespace WebApp1.Migrations
             modelBuilder.Entity("WebApp1.Models.YerelMahkemeKarari", b =>
                 {
                     b.Property<int>("DavaKayitNo")
-                        .IsConcurrencyToken()
                         .HasColumnName("Dava_KayitNo")
                         .HasColumnType("int");
 
                     b.Property<string>("KararNo")
-                        .IsConcurrencyToken()
                         .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)

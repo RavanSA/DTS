@@ -88,6 +88,21 @@ namespace WebApp1.Pages.Davalar
             users.PasswordHash = _userManager.PasswordHasher.HashPassword(users, input.Password);
             }
 
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+
+            var raporOlustur = new LogTable
+            {
+                UserId = userInfo.Id,
+                UserEmail = userInfo.UserName,
+                LogTuru = "KULLANICI BILGILERI GUNCELLENDI",
+                LogDate = DateTime.Now,
+                Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now}" +
+                $" tarihinde, {input.UserFullName} isimli kullanýcý bilgileri guncellendi, Rol: {roles[0]}"
+            };
+
+
+            await _context.LogTable.AddAsync(raporOlustur);
             await _context.SaveChangesAsync();
             return RedirectToPage("/Davalar/Kullanicilar");
         }

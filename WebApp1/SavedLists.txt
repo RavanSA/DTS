@@ -1,0 +1,132 @@
+6a278b8b-0248-4a3e-e0a8-08da9c90eacc,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 15:52:25 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+6ad8b773-8f07-4076-e0a9-08da9c90eacc,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 15:52:34 tarihinde tum davalari excele donusturdu, Rol: Admin
+----------------------------------------------
+
+6a717526-f34d-4a0d-91af-08da9c9332b9,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:08:45 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+c0bc85e9-9988-4bd0-8a55-08da9c93c5a8,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:12:51 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+dc9c0000-ecf1-4371-8a56-08da9c93c5a8,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:14:34 tarihinde 1018 nolu davayı güncelledi, Rol: Admin
+----------------------------------------------
+
+493c4564-1e26-4fb8-bfd8-08da9c947730,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:17:49 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+4b693359-baeb-420d-bfd9-08da9c947730,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:17:57 tarihinde, 1.01.0001 00:00:00 ve 1.01.0001 00:00:00 i sorguladı, Rol: Admin
+----------------------------------------------
+
+fba83dbe-9db4-4bfd-bfda-08da9c947730,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:18:08 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda_acilan_davalari sorguladı, Rol: Admin
+----------------------------------------------
+
+dec764f1-29d5-43f0-c6ea-08da9c98786e,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:46:29 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+39e6d6ff-3966-461e-c6eb-08da9c98786e,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:47:37 tarihinde, 1.01.0001 00:00:00 ve 1.01.0001 00:00:00 i sorguladı, Rol: Admin
+----------------------------------------------
+
+4894cc83-dbd7-405d-31b3-08da9c98d491,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:49:04 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+574e39b5-be32-4213-31b4-08da9c98d491,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 16:49:24 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda_acilan_davalari sorguladı, Rol: Admin
+----------------------------------------------
+
+94ef386e-8833-461e-b761-08da9c9b182e,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 17:05:16 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+4c8d9961-52fa-4ad4-e3ac-08da9c9bdfb7,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 17:10:51 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+6c28d866-541d-4f2f-d62a-08da9c9c37ec,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 17:13:19 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+b900493c-ff69-4087-90f0-08da9c9e636d,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 22.09.2022 17:28:51 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+2ac307e7-6ed7-4c7d-6bb2-08da9f7fa14a,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:26:14 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+4add390b-6df9-4a35-6bb3-08da9f7fa14a,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:38:38 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda_acilan_davalari sorguladı, Rol: Admin
+----------------------------------------------
+
+3a4bb656-88a1-408d-bdcb-08da9f824632,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:45:09 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+57c566f3-c6ad-4194-f517-08da9f82d524,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:49:09 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+26d70d7d-790c-4054-f518-08da9f82d524,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:49:44 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda True raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+882fdb89-504e-4fc8-ff38-08da9f837ba3,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:53:48 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+14040304-0cd2-4410-ff39-08da9f837ba3,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:54:10 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda lehte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+ff2d0927-ed49-4d27-ff3a-08da9f837ba3,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:55:04 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda aleyhte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+a6f8e9cc-5260-49ea-ff3b-08da9f837ba3,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 09:56:32 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda lehte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+64267e93-373f-4ae2-3251-08da9f847142,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:00:41 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+7741f5d6-9356-4c58-3252-08da9f847142,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:00:57 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasinda lehte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+8557b7c6-1661-46c0-3253-08da9f847142,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:00:59 tarihinde, 1.01.0001 00:00:00 ve 1.01.0001 00:00:00 arasinda true raporları indirdi, Rol: Admin
+----------------------------------------------
+
+90a7ebc1-5d3d-4617-ef09-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:07:03 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+b24b4c96-98d1-49cd-ef0a-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:07:03 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+5f00dc9c-9cb7-4eff-ef0b-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:07:15 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasindaki lehte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+a93c9828-55c5-4652-ef0c-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:07:27 tarihinde, lehte raporları indirdi, Rol: Admin
+----------------------------------------------
+
+28854c4a-d148-4be9-ef0d-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:08:06 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasindaki lehte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+7033d967-3308-45a6-ef0e-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:08:46 tarihinde, lehte raporları indirdi, Rol: Admin
+----------------------------------------------
+
+46b405f0-5105-4d51-ef0f-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:08:51 tarihinde, 1.01.2000 00:00:00 ve 12.12.2030 00:00:00 arasindaki aleyhte raporları sorguladı, Rol: Admin
+----------------------------------------------
+
+911a7165-8bfc-4a8b-ef10-08da9f855579,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:08:54 tarihinde, aleyhte raporları indirdi, Rol: Admin
+----------------------------------------------
+
+7a63de35-5bb1-4f1c-bc3b-08da9f8666b9,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:14:42 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+c4e3359c-b4b4-4ad0-bc3c-08da9f8666b9,admintest2@gmail.com,admintest2@gmail.com isimli admin 26.09.2022 10:15:22 tarihinde, user TEST 10 isimli kullanıcı oluşturdu , Rol: Admin
+----------------------------------------------
+
+d39967c9-5361-4435-bc3d-08da9f8666b9,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:23:04 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+d6ff616b-9ec1-4c84-b207-08da9f8847f9,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:28:09 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+52ea8d43-a43f-4dbd-b208-08da9f8847f9,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 10:29:11 tarihinde, User Test 5 isimli kullanıcı bilgileri guncellendi, Rol: Admin
+----------------------------------------------
+
+1f8b8149-3452-4534-842a-08da9f92fc22,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 11:44:46 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+670ba5f1-eba5-4962-6739-08da9f949c05,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 11:56:24 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+
+0e70b61f-0b31-4e03-1d84-08da9f952706,admintest2@gmail.com,admintest2@gmail.com isimli kullanıcı 26.09.2022 12:00:17 tarihinde sisteme giriş yaptı, Rol: Admin
+----------------------------------------------
+

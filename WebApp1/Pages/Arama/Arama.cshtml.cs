@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,17 @@ namespace WebApp1.Pages.Arama
 
         public readonly HukukDTSContext _db;
         public readonly IConfiguration _configuration;
+        public readonly UserManager<IdentityUser> _userManager;
 
-        public AramaModel(HukukDTSContext db, IConfiguration configuration)
+        public AramaModel(
+            HukukDTSContext db,
+            IConfiguration configuration,
+            UserManager<IdentityUser> userManager
+            )
         {
             _db = db;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         public IList<DavaListeleri> Dava { get; set;}
@@ -68,9 +75,24 @@ namespace WebApp1.Pages.Arama
                         isListEmpty = true;
                         break;
                 }
-            }
+
+                var userInfo = await _userManager.GetUserAsync(User);
+                var roles = await _userManager.GetRolesAsync(userInfo);
+
+                var detayliArama = new LogTable
+                {
+                    UserId = userInfo.Id,
+                    UserEmail = userInfo.UserName,
+                    LogTuru = "DETAYLI ARAMA",
+                    LogDate = DateTime.Now,
+                    Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde, {ilkTarih} ve {sonTarih} {davaTurleri}i sorguladý, Rol: {roles[0]}"
+                };
+
+               await _db.LogTable.AddAsync(detayliArama);
+               await _db.SaveChangesAsync();
 
                 Dava = await davaIQ.AsNoTracking().ToListAsync();
+            }      
         }
     }
 }

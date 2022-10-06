@@ -27,13 +27,15 @@ namespace WebApp1.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly HukukDTSContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            HukukDTSContext context)
         {
 
             _userManager = userManager;
@@ -41,6 +43,7 @@ namespace WebApp1.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -122,20 +125,13 @@ namespace WebApp1.Areas.Identity.Pages.Account
                 user.UserFullName = Input.UserName;
                 user.UserName = Input.Email;
                 user.UserDuty = Input.UserDuty;
-                //var user = new IdentityUser {
-                //    UserName = Input.UserName,
-                //    Email = Input.Email,
-                //    PhoneNumber = Input.PhoneNumber
-                //};
 
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    if(Input.Role == null)
+                    if (Input.Role == null)
                     {
                         await _userManager.AddToRoleAsync(user, Roles.Role_User);
                     }
@@ -144,6 +140,22 @@ namespace WebApp1.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }
 
+                    var userInfo = await _userManager.GetUserAsync(User);
+                    var roles = await _userManager.GetRolesAsync(userInfo);
+
+                    var raporOlustur = new LogTable
+                    {
+                        UserId = userInfo.Id,
+                        UserEmail = userInfo.UserName,
+                        LogTuru = "KULLANICI OLUSTURULDU",
+                        LogDate = DateTime.Now,
+                        Aciklama = $"{userInfo.UserName} isimli admin {DateTime.Now}" +
+                        $" tarihinde, {Input.UserName} isimli kullanıcı oluşturdu , Rol: {roles[0]}"
+                    };
+
+
+                    await _context.LogTable.AddAsync(raporOlustur);
+                    await _context.SaveChangesAsync();
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -172,7 +184,6 @@ namespace WebApp1.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

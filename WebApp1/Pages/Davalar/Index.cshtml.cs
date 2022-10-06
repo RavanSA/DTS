@@ -10,7 +10,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using ClosedXML.Excel;
+using ClosedXML.Excel;  
 using System.IO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -23,10 +23,13 @@ namespace WebApp1.Pages.Davalar
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public IndexModel(HukukDTSContext db, IConfiguration configuration)
+        public IndexModel(HukukDTSContext db, 
+            IConfiguration configuration,
+            UserManager<IdentityUser> userManager)
         {
             _db = db;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         public string DavaKayitNoSort { get; set; }
@@ -45,14 +48,14 @@ namespace WebApp1.Pages.Davalar
         public async Task<IActionResult> OnGetAsync(string sortOrder, string currentFilter, 
             string searchString, int? pageIndex) {
 
-            //var user = await _userManager.FindByEmailAsync();
-            //var roles = await _userManager.GetRolesAsync(user);
-
+                                                                                                                                                                                                                                                                                                                        
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
 
+            var userInfo = await _userManager.GetUserAsync(User);
+            
 
             CurrentSort = sortOrder;
 
@@ -102,7 +105,7 @@ namespace WebApp1.Pages.Davalar
                     davaIQ = davaIQ.OrderByDescending(s => s.DavaKayitNo);
                     break;
                 case "esas_no_sort":
-                        davaIQ = davaIQ.OrderByDescending(s => s.EsasNo);
+                    davaIQ = davaIQ.OrderByDescending(s => s.EsasNo);
                     break;
                 case "yargi_dosya_no":
                     davaIQ = davaIQ.OrderByDescending(s => s.YargitayDosyaNo);
@@ -127,11 +130,11 @@ namespace WebApp1.Pages.Davalar
             var pageSize = _configuration.GetValue("PageSize", 6);
 
             Dava = await PaginatedList<DavaListeleri>.CreateAsync(davaIQ.AsNoTracking(),
-                pageIndex ?? 1, pageSize);
+                pageIndex ?? 1, 13);
             return Page();
         }
 
-        public FileResult OnPostExport()
+        public async Task<FileResult> OnPostExport()
         {
             DataTable dt = new DataTable("Grid");
             dt.Columns.AddRange(new DataColumn[36] {
@@ -209,7 +212,7 @@ namespace WebApp1.Pages.Davalar
                     dava.KararOzeti,
                     dava.TemyizEden,
                     dava.TemyizTarihi,
-                     dava.TemyizAciklamasi,
+                    dava.TemyizAciklamasi,
                     dava.SonucTarihi,
                     dava.KaldirmaNo,
                     dava.DavaSonucu,
@@ -223,6 +226,22 @@ namespace WebApp1.Pages.Davalar
                 wb.Worksheets.Add(dt);
                 using( MemoryStream stream = new MemoryStream())
                 {
+
+
+                    var userInfo = await _userManager.GetUserAsync(User);
+                    var roles = await _userManager.GetRolesAsync(userInfo);
+
+                    var davaDetay = new LogTable
+                    {
+                        UserId = userInfo.Id,
+                        UserEmail = userInfo.UserName,
+                        LogTuru = "TUM DAVALAR EXCELE DONUSTURULDU",   
+                        LogDate = DateTime.Now,
+                        Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde tum davalari excele donusturdu, Rol: {roles[0]}"
+                    };
+
+                    await _db.LogTable.AddAsync(davaDetay);
+                    await _db.SaveChangesAsync();
                     wb.SaveAs(stream);
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "dava_list.xlsx");
                 }

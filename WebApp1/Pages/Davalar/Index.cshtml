@@ -4,7 +4,7 @@
 @{
 }
 
-<div class="form-row" style="width:90%">
+@*<div class="form-row" style="width:90%">
     <div class="form-group col-md-3">
         <h4>Davalar</h4>
     </div>
@@ -27,183 +27,224 @@
                 <button class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
                     <i class="fa fa-download" aria-hidden="true"></i> Dosya Oluştur
                 </button>
-                
+
             </form>
         </div>
     }
-    </div>
+</div>*@
 
 <br />
 
 @if (Model.Dava.Count() > 0)
 {
-    <div class="overflow-auto">
-        <table class="table table-striped">
-            <thead style="background: #0e1a35;">
-                <tr style="color:white;">
-                    <th class="h8">
-                        Detay
-                    </th>
-                    <th class="h8">
-                        <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaKayitNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
-                            Dava Kayıt No
-                        </a>
-                    </th>
-                    <th class="h8">
-                        <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.EsasNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
-                            Esas No
-                        </a>
-                    </th>
-                    <th class="h8">
-                        <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.YargitayDosyaNoSort"
-                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
-                            Yargıtay Dosya No
-                        </a>
-                    </th>
-                    <th class="h8">
-                        <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaTarihiSort"
-                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
-                            Dava Tarihi
-                        </a>
-                    </th>
-                    <th class="h8">
-                        <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.OlusturulmaTarihiSort"
-                           asp-route-currentFilter="@Model.CurrentFilter" style="color:white;text-decoration:none;">
-                            Oluşturulma Tarihi
-                        </a>
-                    </th>
 
-                    <th class="h8">
-                        <a asp-for="Dava.FirstOrDefault().KararNo">Karar No</a>
-                    </th>
-                    <th class="h8">
-                        <a asp-for="Dava.FirstOrDefault().TemyizDurumu"> Temyiz Durumu</a>
-                    </th>
-                    <th class="h8">
-                        <a asp-for="Dava.FirstOrDefault().KaldirmaNo"> Kaldırma No</a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="h10">
-                @foreach (var item in Model.Dava)
-                {
-                <tr >
-                    <td>
-                        <a asp-page="Detay" asp-route-davaKayitNo="@item.DavaKayitNo"
-                           class="btn btn-dark btn-hover">Detay</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DavaKayitNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EsasNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.YargitayDosyaNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DavaTarihi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OlusturulmaTarihi)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <table style="width:100%">  
+                <tbody>
+                    <tr>
+                        <td>
+                            <span> Davalar </span>
+                        </td>
+                        <td style="text-align:right;">
+                            <div>
+                                @*<form asp-page="/Davalar" method="get" style="width:20%;height:0px;">
+            <input type="text" name="SearchString" value="@Model.CurrentFilter"
+                   placeholder="Ara.."  />
+        </form>*@
+                                @*<a class="btn btn-default btn-xs" asp-page="YeniDava">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>*@
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <form asp-page="/Davalar" method="get" style="width:20%;height:0px;">
+                                            <input type="text" name="SearchString" value="@Model.CurrentFilter"
+                                                   placeholder="Ara.." id="inputSearch" style="display:none;" />
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <form method="post">
 
-                    </td>
-                    <td>
-                        @{ 
-                            var kararNo = "";
-                            if (item.KararNo == null)
-                            {
-                                kararNo = "Henüz Sonuçlandırılmadı";
+                                            <a class="btn btn-default btn-xs" id="iconSearch" onclick="iconSearch()">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-xs" asp-page="YeniDava">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                            @if(User.IsInRole(Roles.Role_Admin))
+                                            {
+                                        <button class="btn btn-default btn-xs" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                            }
+                                            
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="overflow-auto" >
+            <table class="table table-hover" style="text-decoration:none;color:black;font-size:11px;">
+                <thead>
+                    <tr >
+                        <th class="h8">
+                            Detay
+                        </th>
+                        <th class="h8">
+                            <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaKayitNoSort"
+                               asp-route-currentFilter="@Model.CurrentFilter" style="color:black;text-decoration:none;">
+                                Dava No 
+                            </a>
+                        </th>
+                        <th class="h8">
+                            <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.EsasNoSort"
+                               asp-route-currentFilter="@Model.CurrentFilter" style="color:black;text-decoration:none;">
+                                Esas No
+                            </a>
+                        </th>
+                        <th class="h8">
+                            <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.YargitayDosyaNoSort"
+                               asp-route-currentFilter="@Model.CurrentFilter" style="color:black;text-decoration:none;">
+                                Yargıtay No
+                            </a>
+                        </th>
+                        <th class="h8">
+                            <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.DavaTarihiSort"
+                               asp-route-currentFilter="@Model.CurrentFilter" style="color:black;text-decoration:none;">
+                                Dava Tarihi
+                            </a>
+                        </th>
+                        <th class="h8">
+                            <a asp-page="/Davalar/Index" asp-route-sortOrder="@Model.OlusturulmaTarihiSort"
+                               asp-route-currentFilter="@Model.CurrentFilter" style="color:black;text-decoration:none">
+                                Oluşturulma Tarihi
+                            </a>
+                        </th>
+
+                        <th class="h8">
+                            <a asp-for="Dava.FirstOrDefault().KararNo">Karar No</a>
+                        </th>
+                        <th class="h8">
+                            <a asp-for="Dava.FirstOrDefault().TemyizDurumu"> Temyiz </a>
+                        </th>
+                        <th class="h8">
+                            <a asp-for="Dava.FirstOrDefault().KaldirmaNo"> Kaldırma No</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="h10">
+                    @foreach (var item in Model.Dava)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page="Detay" asp-route-davaKayitNo="@item.DavaKayitNo"
+                                   class="btn btn-default btn-xs">Detay</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DavaKayitNo)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EsasNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.YargitayDosyaNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DavaTarihi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OlusturulmaTarihi)
+
+                            </td>
+                            <td>
+                                @{
+                                    var kararNo = "";
+                                    if (item.KararNo == null)
+                                    {
+                                        kararNo = "Henüz Sonuçlandırılmadı";
+                                    }
+                                    else
+                                    {
+                                        kararNo = item.KararNo;
+                                    }
+
+                                }
+                                @Html.DisplayFor(modelItem => kararNo)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TemyizDurumu)
+                            </td>
+                            <td>
+                                @{
+
+
+                                    var temyizDurumu = "";
+                                    if (item.KaldirmaNo == null)
+                                    {
+                                        temyizDurumu = "Henüz Sonuçlandırılmadı";
+                                    }
+                                    else
+                                    {
+                                        temyizDurumu = item.KaldirmaNo;
+                                    }
                             }
-                            else
-                            {
-                                kararNo = item.KararNo;
+                            @Html.DisplayFor(modelItem => temyizDurumu)
+                            @{
+
                             }
 
-                        }
-                        @Html.DisplayFor(modelItem => kararNo)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TemyizDurumu)
-                    </td>
-                    <td>@{ 
-
-
-                        var temyizDurumu = "";
-                        if (item.KaldirmaNo == null)
-                        {
-                            temyizDurumu = "Henüz Sonuçlandırılmadı";
-                        }
-                        else
-                        {
-                            temyizDurumu = item.KaldirmaNo;
-                        }
-                        }
-                        @Html.DisplayFor(modelItem => temyizDurumu)
-
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 }
-            </tbody>
-        </table>
-        @{
-            var prevDisabled = !Model.Dava.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.Dava.HasNextPage ? "disabled" : "";
+                </tbody>
+            </table>
+
+            @{
+                var prevDisabled = !Model.Dava.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.Dava.HasNextPage ? "disabled" : "";
+            }
+        </div>
+        </div>
+
+        <a asp-page="/Davalar/Index" 
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Dava.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default btn-xs @prevDisabled">
+            Geri
+        </a>
+
+        <a asp-page="/Davalar/Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Dava.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default btn-xs @nextDisabled">
+            İleri
+        </a>
+        }
+        else
+        {
+        <h1>Dava Bulunamadi</h1>
         }
 
-    </div>
+        </>
+        </>
 
+<script>
+    function iconSearch() {
+        var inputSearch = document.getElementById("inputSearch");
+        var iconSearch = document.getElementById("iconSearch");
+        iconSearch.style.display = "none"
+        inputSearch.style.display = "block"
+    }
 
-    <a asp-page="/Davalar/Index"
-       asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.Dava.PageIndex - 1)"
-       asp-route-currentFilter="@Model.CurrentFilter"
-       class="btn btn-dark @prevDisabled">
-        Geri
-    </a>    
-
-    <a asp-page="/Davalar/Index"
-       asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.Dava.PageIndex + 1)"
-       asp-route-currentFilter="@Model.CurrentFilter"
-       class="btn btn-dark @nextDisabled">
-        İleri
-    </a>
-}
-else
-{
-    <h1>Dava Bulunamadi</h1>
-}
-
-    </>
-    </>
-
-@section scripts{
-    <partial name="_ValidationScriptsPartial" />
-    <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript">
-        function handleSortClick() {
-            let downButton = document.getElementById("down-icon")
-            let upButton = document.getElementById("up-icon")
-
-            downButton.style.visibility == "visible" ? "hidden" : "visible"
-            upButton.style.visibility = "hidden" ? "visible" : "hidden"
-  
-
-            if (downButton.style.visibility == "visible") {
-                downButton.style.visibility = "hidden"
-            } else {
-                downButton.style.visibility = "visible"
-            }
-
-            if (upButton.style.visibility == "hidden") {
-               upButton.style.visibility = "visible"
-            } else {
-                upButton.style.visibility = "hidden"
-            }
-        }
-    </script>
-}
+   
+</script>

@@ -790,11 +790,12 @@ header {
 
 
 .h8{
-    color:white;
+    color:black;
+    text-decoration:none;
 }
 
 .search-table {
-    height: 600px;
+    height: 650px;
     position: relative;
 }
 
@@ -869,4 +870,14 @@ li {
 
 .nav-list-item {
     margin: 20px;
+}
+
+.rapor-table {
+    height: 700px;
+    position: relative;
+}
+
+.rapor-scroll {
+    max-height: 100%;
+    overflow: auto;
 }

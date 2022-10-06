@@ -6,7 +6,9 @@ namespace WebApp1.Models
 {
     public partial class YerelMahkemeKarari
     {   
+        [ConcurrencyCheck]
         public int DavaKayitNo { get; set; }
+        [ConcurrencyCheck]
         [Required]
         [StringLength(20, MinimumLength = 1)]
         public string KararNo { get; set; }

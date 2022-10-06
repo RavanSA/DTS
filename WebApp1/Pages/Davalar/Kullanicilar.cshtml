@@ -3,92 +3,100 @@
 @{
 }
 
-<div class="form-row">
-    <div class="form-group col-md-8">
-        <h4>Kullanıcı bilgileri</h4>
-    </div>
-
-</div>
-
-<div class="border container search-table" style="padding:30px;">
+<div class="border container search-table" style="padding:0px;">
     <div class="search-scroll">
-            <div>
-               
-                <table class="table table-striped">
-                    <thead style="background: #0e1a35;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <table style="width:100%">
+                    <tbody>
                         <tr>
-
-                            <th class="h8">
-                                Düzenle
-                            </th>
-                            <th class="h8">
-                                <a>
-                                    Email
-                                </a>
-                            </th>
-                            <th class="h8">
-                                <a>
-                                    Kullanıcı Adı
-                                </a>
-                            </th>
-                            <th class="h8">
-                                <a>
-                                    Telefon Numarası
-                                </a>
-                            </th>
-                            <th class="h8">
-                                <a>
-                                    Kullanıcı Görevi
-                                </a>
-                            </th>
-                            <th class="h8">
-                                <a>
-                                   Rol
-                                </a>
-                            </th>
-                            
+                            <td>
+                                <span> Kullanıcı Bilgileri </span>
+                            </td>
+                            <td style="text-align:right;">
+                                
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="h10">
-                        @foreach (var i in Model.userWithRoles)
-                        {
-                            <tr>
-                                @{
-                                    var disableButton = "";
-                                    } 
-                                <td>
-                                    @if (i.Role != "Admin")
-                                    {
-                                        <a asp-page="KullaniciBilgileri"
-                                           class="btn btn-dark h8" asp-route-userId="@i.UserId">Düzenle</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn btn-dark h8"  disabled>Düzenle</a>
-                                    }
-
-                                                            </td>
-                                <td>
-                                    @i.Username
-                                </td>
-                                <td>
-                                    @i.UserFullName
-                                </td>
-                                <td>
-                                    @i.PhoneNumber
-                                </td>
-                                <td>
-                                    @i.UserDuty
-                                </td>
-                                <td>
-                                    @i.Role
-
-                                </td>
-                            </tr>
-                        }
                     </tbody>
                 </table>
             </div>
+                    <table class="table table-hover" >
+                        <thead style="text-decoration:none;color:black;font-size:11px;">
+                            <tr>
 
-    </div>
-</div>
+                                <th class="h8">
+                                    Düzenle
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Email
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Kullanıcı Adı
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Telefon Numarası
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Kullanıcı Görevi
+                                    </a>
+                                </th>
+                                <th class="h8">
+                                    <a>
+                                        Rol
+                                    </a>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:11px;">
+                            @foreach (var i in Model.userWithRoles)
+                            {
+                                <tr>
+                                    @{
+                                        var disableButton = "";
+                                    }
+                                    <td>
+                                        @if (i.Role != "Admin")
+                                        {
+                                            <a asp-page="KullaniciBilgileri" style="color:#5B636A;font-family:Open Sans;font-size:9pt;"
+                                               class="btn btn-default btn-xs h8" asp-route-userId="@i.UserId">Düzenle</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-default btn-xs h8" style="color:#5B636A;font-family:Open Sans; font-size:9pt;" disabled>Düzenle</a>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @i.Username
+                                    </td>
+                                    <td>
+                                        @i.UserFullName
+                                    </td>
+                                    <td>
+                                        @i.PhoneNumber
+                                    </td>
+                                    <td>
+                                        @i.UserDuty
+                                    </td>
+                                    <td>
+                                        @i.Role
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>

@@ -34,7 +34,7 @@ namespace WebApp1.Models
         public virtual DbSet<Temyiz> Temyiz { get; set; }
         public virtual DbSet<YerelMahkemeKarari> YerelMahkemeKarari { get; set; }
         public virtual DbSet<AppUsers> AppUsers { get; set; }
-
+        public virtual DbSet<LogTable> LogTable { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

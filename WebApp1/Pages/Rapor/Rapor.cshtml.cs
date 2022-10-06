@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -19,11 +20,19 @@ namespace WebApp1.Pages.Rapor
     public class RaporModel : PageModel
     {
         private readonly IConfiguration _configuration;
+        private readonly HukukDTSContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public RaporModel(IConfiguration configuration)
+        public RaporModel(
+            IConfiguration configuration,
+            HukukDTSContext context,
+            UserManager<IdentityUser> userManager
+            )
         {
             _configuration = configuration;
             con.ConnectionString = _configuration.GetConnectionString("DefaultConnection");
+            _userManager = userManager;
+            _context = context;
         }
 
         SqlCommand com = new SqlCommand();
@@ -42,7 +51,7 @@ namespace WebApp1.Pages.Rapor
         public FileContentResult excel_file { get; set; }
 
 
-        public void OnGet(DateTime ilkTarih, DateTime sonTarih, bool? lehte)
+        public async Task OnGet(DateTime ilkTarih, DateTime sonTarih, bool? lehte)
         {
 
             if (lehte != null) {
@@ -53,9 +62,26 @@ namespace WebApp1.Pages.Rapor
                     || ilkTarih == DateTime.MinValue
                     || sonTarih == DateTime.MinValue))
                 {
-                  
 
-                            con.Open();
+                    var userInfo = await _userManager.GetUserAsync(User);
+                    var roles = await _userManager.GetRolesAsync(userInfo);
+                    var lehteResult = (bool)lehte ? "lehte" : "aleyhte";
+
+                    var raporOlustur = new LogTable
+                    {
+                        UserId = userInfo.Id,
+                        UserEmail = userInfo.UserName,
+                        LogTuru = "RAPOR OLUSTURULDU",
+                        LogDate = DateTime.Now,
+                        Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now}" +
+                        $" tarihinde, {ilkTarih} ve {sonTarih} arasindaki {lehteResult} raporlarý goruntuledi, Rol: {roles[0]}"
+                    };
+
+
+                    await _context.LogTable.AddAsync(raporOlustur);
+                    await _context.SaveChangesAsync();
+
+                    con.Open();
                             com.Connection = con;
                             com.CommandText = "SELECT * FROM func_DonemlikRapor(@ilkTarih,@sonTarih,@lehteInt)";
                             com.Parameters.Add("@ilkTarih", SqlDbType.DateTime).Value = ilkTarih;
@@ -77,12 +103,14 @@ namespace WebApp1.Pages.Rapor
                                     DEGER = (dr["DEGER"] as decimal?).GetValueOrDefault()
                                 });
                             }
+
+                                                
                 }
             }
         }
 
 
-        public FileContentResult OnPostDownloadCSV()
+        public async Task<FileContentResult> OnPostDownloadCSV()
         {
             var ilkTarih1 = Request.Form["ilkTarih"];
             var sonTarih1 = Request.Form["sonTarih"];
@@ -91,7 +119,23 @@ namespace WebApp1.Pages.Rapor
             DateTime sonTarihDate = DateTime.Parse(sonTarih1);
 
             var lehteInt = lehte == "false" ? 0 : 1;
-            
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+            var lehteResult = lehte== "false"  ? "aleyhte" : "lehte";
+
+            var raporOlustur = new LogTable
+            {
+                UserId = userInfo.Id,
+                UserEmail = userInfo.UserName,
+                LogTuru = "RAPOR INDIRILDI",
+                LogDate = DateTime.Now,
+                Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now}" +
+                $" tarihinde, {lehteResult} raporlarý indirdi, Rol: {roles[0]}"
+            };
+
+
+            await _context.LogTable.AddAsync(raporOlustur);
+            await _context.SaveChangesAsync();
 
             con.Open();
             com.Connection = con;
@@ -142,6 +186,9 @@ namespace WebApp1.Pages.Rapor
                 wb.Worksheets.Add(dt);
                 using (MemoryStream stream = new MemoryStream())
                 {
+
+
+
                     wb.SaveAs(stream);
                     con.Close();
                     excel_file = File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "rapor_donemlik.xlsx");

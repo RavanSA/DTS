@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Arama\Davalar\**" />
     <Compile Remove="Pages\NewFolder\**" />
+    <Content Remove="Pages\Arama\Davalar\**" />
     <Content Remove="Pages\NewFolder\**" />
+    <EmbeddedResource Remove="Pages\Arama\Davalar\**" />
     <EmbeddedResource Remove="Pages\NewFolder\**" />
+    <None Remove="Pages\Arama\Davalar\**" />
     <None Remove="Pages\NewFolder\**" />
   </ItemGroup>
 

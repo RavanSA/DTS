@@ -11,11 +11,9 @@ namespace WebApp1.Models
         [ConcurrencyCheck]
         [DataType(DataType.Date)]
         public DateTime? SonucTarihi { get; set; }
-        [Required]
         [StringLength(20, MinimumLength = 1)]
         public string KaldirmaNo { get; set; }
         public bool? DavaSonucu1 { get; set; }
-        [Required]
         [StringLength(8000, MinimumLength =1)]
         public string IcraSafhasi { get; set; }
         public double? AsilAlacak { get; set; }

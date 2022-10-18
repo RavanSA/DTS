@@ -54,17 +54,12 @@ namespace WebApp1.Pages.Davalar
                 {
                     UserId = userInfo.Id,
                     UserEmail = userInfo.UserName,
-                    LogTuru = "",
+                    LogTuru = "DAVA GUNCELLEME",
                     LogDate = DateTime.Now,
-                    Aciklama = $"{userInfo.UserName} {DateTime.Now}  {davaKayitNo}  {roles[0]}"
+                    Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde {davaKayitNo} 'nolu davayý güncelledi  {roles[0]}"
                 };
 
 
-                //MahkemeKarari = await _db.YerelMahkemeKarari.FindAsync(davaKayitNo);
-                //DavaSonucu = await _db.DavaSonucu.FindAsync(davaKayitNo);
-                //Temyiz = await _db.Temyiz.FindAsync(davaKayitNo);
-
-                //_db.Entry(Dava).State = EntityState.Modified;
                 var dava = 
                     (from d in _db.Dava where d.DavaKayitNo == davaKayitNo select d).SingleOrDefault();
 
@@ -85,11 +80,10 @@ namespace WebApp1.Pages.Davalar
                 dava.DigerDavacilar = Dava.DigerDavacilar;
                 dava.DigerDavalilar = Dava.DigerDavalilar;
                 dava.Aciklama = Dava.Aciklama;
-                dava.OlusturulmaTarihi = Dava.OlusturulmaTarihi;
-                dava.DegistirilmeTarihi = Dava.DegistirilmeTarihi;
-                dava.OlusturanKisi = Dava.OlusturanKisi;
-                dava.DegistirenKisi = Dava.DegistirenKisi;
-                dava.DavaFormTipi = Dava.DavaFormTipi;
+                dava.DegistirilmeTarihi = DateTime.Now;
+                dava.TemyizEdildi = Dava.TemyizEdildi;
+                dava.DegistirenKisi = userInfo.UserName;
+                dava.DavaFormTipi = 1;
 
 
                 var mahkemeKarari = await _db.YerelMahkemeKarari.FindAsync(davaKayitNo);
@@ -108,7 +102,6 @@ namespace WebApp1.Pages.Davalar
 
                     await _db.YerelMahkemeKarari.AddAsync(insertMahkemeKarari);
                 }
-
                 else if(mahkemeKarari != null)
                 {
                     mahkemeKarari.KararNo = MahkemeKarari.KararNo;
@@ -171,18 +164,8 @@ namespace WebApp1.Pages.Davalar
                     temyiz.TemyizSonucu = Temyiz.TemyizSonucu;
                     temyiz.Aciklama = Temyiz.Aciklama;
                 }
-                //_db.Entry(MahkemeKarari).State = await _db.YerelMahkemeKarari.FindAsync(davaKayitNo) == null
-                //   ? EntityState.Added : EntityState.Modified;
 
-                //_db.Entry(DavaSonucu).State = await _db.DavaSonucu.FindAsync(davaKayitNo) == null
-                //    ? EntityState.Added : EntityState.Modified;
-
-                //_db.Entry(Temyiz).State = await _db.Temyiz.FindAsync(davaKayitNo) == null
-                //    ? EntityState.Added : EntityState.Modified;
-
-                //await _db.LogTable.AddAsync(davaDetay);
-
-
+                await _db.LogTable.AddAsync(davaDetay);
                 await _db.SaveChangesAsync();
 
                 return RedirectToPage("/Davalar/Detay", new { davaKayitNo = davaKayitNo });

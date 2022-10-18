@@ -2,15 +2,16 @@
 @model WebApp1.Pages.Davalar.LogModel
 @using WebApp1.Models
 @{
+    var prevDisabled = "disabled";
+    var nextDisabled = "disabled";
 }
 
 
 @if (User.IsInRole(Roles.Role_Admin))
 {
-    <div class="border container search-table" style="padding:30px;">
+    <div class="search-table">
         <div class="search-scroll">
             <div class="panel panel-default">
-
                 <div class="panel-heading">
                     <table style="width:100%">
                         <tbody>
@@ -20,9 +21,14 @@
                                 </td>
                                 <td style="text-align:right;">
                                     <span>
-                                        <form method="post" asp-page="/Davalar/Log" asp-page-handler="DownloadLogFile">
-                                            <button class="btn btn-default btn-sx" type="submit">
+                                        <form method="post">
+                                            <button class="btn btn-default btn-sx" type="submit" asp-page="/Davalar/Log" asp-page-handler="DownloadLogFile">
                                                 <i class="fa fa-download" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-default btn-sx" type="submit" 
+                                                    asp-page="/Davalar/Log" asp-page-handler="DeleteLogTable"
+                                                    onclick="return confirm('Are you sure you want to delete this?')">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
                                     </span>
@@ -51,39 +57,38 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label> </label>
+                                <label style="color:#f5f5f5;">A</label>
 
-                                <input type="submit" value="Ara" class="btn btn-dark btn-search"
+                                <input type="submit" value="Ara" class="btn btn-default btn-xs" style="width:100%; font-size:18px;"
                                        asp-route-ilkTarih="@Model.ILKTARIH" asp-route-sonTarih="@Model.SONTARIH" />
                             </div>
 
                         </div>
                         <br />
-
                     </form>
                 </div>
-                <div class="panel-heading">
-
-                    <div class="overflow-auto">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="h8">
-                                        Email
-                                    </th>
-                                    <th class="h8">
-                                        Log Türü
-                                    </th>
-                                    <th class="h8">
-                                        Açıklama
-                                    </th>
-                                    <th class="h8">
-                                        Tarih
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="h10" style="font-size:11px;">
-                                @foreach (var log in Model.logPagination)   
+                <div class="overflow-auto">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="h8">
+                                    Email
+                                </th>
+                                <th class="h8">
+                                    Log Türü
+                                </th>
+                                <th class="h8">
+                                    Açıklama
+                                </th>
+                                <th class="h8">
+                                    Tarih
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="h10" style="font-size:11px;">
+                            @if (Model.logPagination != null)
+                            {
+                                @foreach (var log in Model.logPagination)
                                 {
                                     <tr>
                                         <td>
@@ -100,58 +105,64 @@
                                         </td>
                                     </tr>
                                 }
-                            </tbody>
-                        </table>
+
+                                prevDisabled = !Model.logPagination.HasPreviousPage ? "disabled" : "";
+                                nextDisabled = !Model.logPagination.HasNextPage ? "disabled" : "";
+
+                            }
+                        </tbody>
+                    </table>
 
 
-                        @{
-                            var prevDisabled = !Model.logPagination.HasPreviousPage ? "disabled" : "";
-                            var nextDisabled = !Model.logPagination.HasNextPage ? "disabled" : "";
-                        }
 
 
-                    </div>
+
                 </div>
-
-
             </div>
+
+
         </div>
     </div>
-    
-        var sonTarih = "";
-        var ilkTarih = "";
-        var id = Request.QueryString.ToString();
-        string[] tarih = id.Split("&");
-        if (tarih.Length == 2)
-        {
-            string[] test = id.Split("=");
-            string[] ilkTarihArr = test[1].Split("&");
-            ilkTarih = ilkTarihArr[0];
-            sonTarih = test[2];
-        }
-        else if (tarih.Length == 3)
-        {
-            string[] ilkTarihArr = tarih[1].Split("=");
-            ilkTarih = ilkTarihArr[1];
-            string[] sonTarihArr = tarih[2].Split("=");
-            sonTarih = sonTarihArr[1];
-        }
 
-    <a asp-page="/Davalar/Log"
-       asp-route-pageIndex="@(Model.logPagination.PageIndex - 1)"
-       asp-route-ilkTarih="@ilkTarih"
-       asp-route-sonTarih='@sonTarih'
-       class="btn btn-default btn-xs @prevDisabled">
-        Geri
-    </a>
+    var sonTarih = "";
+    var ilkTarih = "";
+    var id = Request.QueryString.ToString();
+    string[] tarih = id.Split("&");
+    if (tarih.Length == 2)
+    {
+        string[] test = id.Split("=");
+        string[] ilkTarihArr = test[1].Split("&");
+        ilkTarih = ilkTarihArr[0];
+        sonTarih = test[2];
+    }
+    else if (tarih.Length == 3)
+    {
+        string[] ilkTarihArr = tarih[1].Split("=");
+        ilkTarih = ilkTarihArr[1];
+        string[] sonTarihArr = tarih[2].Split("=");
+        sonTarih = sonTarihArr[1];
+    }
 
-    <a asp-page="/Davalar/Log"
-       asp-route-pageIndex="@(Model.logPagination.PageIndex + 1)"
-       asp-route-ilkTarih='@ilkTarih'
-       asp-route-sonTarih='@sonTarih'
-       class="btn btn-default btn-xs @nextDisabled">
-        İleri
-    </a>
+    if (Model.logPagination != null)
+    {
+
+        <a asp-page="/Davalar/Log"
+           asp-route-pageIndex="@(Model.logPagination.PageIndex - 1)"
+           asp-route-ilkTarih="@ilkTarih"
+           asp-route-sonTarih='@sonTarih'
+           class="btn btn-default btn-xs @prevDisabled">
+            Geri
+        </a>
+
+        <a asp-page="/Davalar/Log"
+           asp-route-pageIndex="@(Model.logPagination.PageIndex + 1)"
+           asp-route-ilkTarih='@ilkTarih'
+           asp-route-sonTarih='@sonTarih'
+           class="btn btn-default btn-xs @nextDisabled">
+            İleri
+        </a>
+    }
+
 }
 else
 {

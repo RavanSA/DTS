@@ -21,7 +21,7 @@ namespace WebApp1.Pages.Davalar
         private readonly HukukDTSContext _context;
         private readonly IConfiguration _configuration;
 
-        public LogModel( HukukDTSContext context, IConfiguration configuration)
+        public LogModel(HukukDTSContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -47,7 +47,7 @@ namespace WebApp1.Pages.Davalar
             if(ilkTarih == DateTime.MinValue && sonTarih == DateTime.MinValue) {
                 ilkTarih = null;
                 sonTarih = null;
-            }           
+            }
 
             ILKTARIH = ilkTarih;
             SONTARIH = sonTarih;    
@@ -58,6 +58,7 @@ namespace WebApp1.Pages.Davalar
                     .OrderByDescending(s => s.LogDate);
             } else 
             {
+
                 logTable = logTable.OrderByDescending(l => l.LogDate);
             }
 
@@ -105,5 +106,14 @@ namespace WebApp1.Pages.Davalar
 
             return File(dataAsBytes, "text/plain", $"log_file_{utcNow}.txt");
         }
+
+        public void OnPostDeleteLogTable()
+        {
+             var allLog = from l in _context.LogTable select l;
+             _context.LogTable.RemoveRange(allLog);
+            _context.SaveChanges();
+        }
+
+
     }
 }

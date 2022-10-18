@@ -69,12 +69,37 @@ namespace WebApp1.Pages.Davalar
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             users = await _context.AppUsers.FindAsync(userId);
+
+            input = new EditInputModel()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string userId)
         {
+
+
             users = await _context.AppUsers.FindAsync(userId);
+            var roleId = _roleManager.Roles.FirstOrDefault().Id;
+            var userInfo = await _userManager.GetUserAsync(User);   
+            var roles = await _userManager.GetRolesAsync(users);
+
+            if (roles[0] != input.Role)
+            {
+                await _userManager.RemoveFromRoleAsync(users, roles[0]);
+                await _context.SaveChangesAsync();
+                await _userManager.AddToRoleAsync(users, input.Role);
+                _context.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
             var userPassword = users.PasswordHash;
             if(!ModelState.IsValid)
             {
@@ -83,13 +108,12 @@ namespace WebApp1.Pages.Davalar
             users.UserFullName = input.UserFullName;
             users.PhoneNumber = input.PhoneNumber;
             users.UserDuty = input.UserDuty;
+
+            
             if(userPassword != input.Password)
             {
-            users.PasswordHash = _userManager.PasswordHasher.HashPassword(users, input.Password);
+                 users.PasswordHash = _userManager.PasswordHasher.HashPassword(users, input.Password);
             }
-
-            var userInfo = await _userManager.GetUserAsync(User);
-            var roles = await _userManager.GetRolesAsync(userInfo);
 
             var raporOlustur = new LogTable
             {
@@ -100,7 +124,6 @@ namespace WebApp1.Pages.Davalar
                 Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now}" +
                 $" tarihinde, {input.UserFullName} isimli kullanýcý bilgileri guncellendi, Rol: {roles[0]}"
             };
-
 
             await _context.LogTable.AddAsync(raporOlustur);
             await _context.SaveChangesAsync();

@@ -33,7 +33,7 @@ namespace WebApp1.Pages.Davalar
 
         public async Task<IActionResult> OnPost(int davaKayitNo)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
 
                 var userInfo = await _userManager.GetUserAsync(User);

@@ -881,3 +881,13 @@ li {
     max-height: 100%;
     overflow: auto;
 }
+
+.dava-table {
+    height: 680px;
+    position: relative;
+}
+
+.dava-scroll {
+    max-height: 100%;
+    overflow: auto;
+}

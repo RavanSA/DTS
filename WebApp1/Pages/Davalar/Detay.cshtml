@@ -3,8 +3,10 @@
 @using WebApp1.Models
 @{
 }
-<div class="new-case-table" style="padding:0px;">
-    <div class="new-case-scroll">
+
+
+<div class="dava-table" style="padding:0px;">
+    <div class="dava-scroll">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <table style="width:100%">
@@ -129,9 +131,9 @@
                             <td style="text-align:right;">
                                 <span>
                                     @*<a asp-page="GuncelleYerelMahkemeKarari" asp-route-id="@Model.Dava.DavaKayitNo" type="button" class="btn btn-default btn-xs"
-                                       style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
-                                        <span class="fal fa-user-cog text-danger"></span> Güncelle
-                                    </a>*@
+                                           style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
+                                            <span class="fal fa-user-cog text-danger"></span> Güncelle
+                                        </a>*@
                                 </span>
                             </td>
                         </tr>
@@ -160,9 +162,9 @@
                         }
                         else
                         {
-                            <p>Mahkeme karari sonuclandırılmadı</p>
-
+                            <center>Mahkeme kararı sonuçlandırılmadı</center>
                         }
+
                     }
                 </tbody>
             </table>
@@ -179,9 +181,9 @@
                             <td style="text-align:right;">
                                 <span>
                                     @*<a asp-page="DavaSonucu" asp-route-id="@Model.Dava.DavaKayitNo" type="button" class="btn btn-default btn-xs"
-                                       style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
-                                        <span class="fal fa-user-cog text-danger"></span> Güncelle
-                                    </a>*@
+                                           style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
+                                            <span class="fal fa-user-cog text-danger"></span> Güncelle
+                                        </a>*@
                                 </span>
                             </td>
                         </tr>
@@ -232,7 +234,7 @@
                         }
                         else
                         {
-                            <p>Dava sonuçlandırılmadı</p>
+                            <center>Dava sonuçlandırılmadı</center>
                         }
                     }
                 </tbody>
@@ -252,9 +254,9 @@
                             <td style="text-align:right;">
                                 <span>
                                     @*<a asp-page="Temyiz" asp-route-id="@Model.Dava.DavaKayitNo" type="button" class="btn btn-default btn-xs"
-                                       style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
-                                        <span class="fal fa-user-cog text-danger"></span> Güncelle
-                                    </a>*@
+                                           style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
+                                            <span class="fal fa-user-cog text-danger"></span> Güncelle
+                                        </a>*@
                                 </span>
                             </td>
                         </tr>
@@ -296,7 +298,7 @@
                         }
                         else
                         {
-                            <p>Dava sonuçlandırılmadı</p>
+                            <center>Temyiz sonuçlandırılmadı</center>
                         }
                     }
                 </tbody>
@@ -313,21 +315,21 @@
                                 <span>DavaEki</span>
                             </td>
                             <td style="text-align:right;">
-                                    <form method="post" enctype="multipart/form-data">
-                                        <div class="from-row">
-                                            <div class="form-group col-md-6">
-                                                <label class="btn btn-default btn-xs">
-                                                    Dosya Seç
-                                                    <input type="file" name="dosya" style="display:none;" class="btn btn-dark btn-search" />
-                                                </label>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <input type="submit" id="btnUpload" value="Yükle" asp-page-handler="UploadFile" class="btn btn-default btn-xs" />
-                                                <input asp-for="davaKayitNo" name="davaKayitNo" value="@davaID.ToString()"
-                                                       type="hidden" class="form-control" />
-                                            </div>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="from-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="btn btn-default btn-xs">
+                                                Dosya Seç
+                                                <input type="file" name="dosya" style="display:none;" class="btn btn-dark btn-search" />
+                                            </label>
                                         </div>
-                                    </form>
+                                        <div class="form-group col-md-6">
+                                            <input type="submit" id="btnUpload" value="Yükle" asp-page-handler="UploadFile" class="btn btn-default btn-xs" />
+                                            <input asp-for="davaKayitNo" name="davaKayitNo" value="@davaID.ToString()"
+                                                   type="hidden" class="form-control" />
+                                        </div>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
@@ -335,45 +337,42 @@
             </div>
             <table id="davaBilgi" class="table table-hover" style="width:100%; font-size:11px;">
                 <tbody>
-                                            @if (Model.DavaEki != null)
-                                            {
-                                                        
-                                                        @foreach (var file in Model.DavaEki)
-                                                        {
-                                                            <tr>
-                                                                <td><b>Dosya İsmi / Dosya</b></td>
-                                                                <td>
-                                                                    Ek-@file.KayitNo /
-                                                                    <button type="submit" class="btn btn-default btn-xs">
-                                                                        <a href="@Url.Page("Detay", "DownloadFile", new { dosyaId = file.KayitNo })" style="text-decoration:none;">
-                                                                            Yükle
-                                                                        </a>
-                                                                    </button>
-                                                                    <form method="post" asp-page-handler="DeleteFile"
-                                                                          onclick="return confirm('Are you sure you want to delete this?')">
-                                                                        <input type="hidden" name="kayitNo" value="@file.KayitNo" />
-                                                                        <input type="hidden" name="davaKayitNo" value="@file.DavaKayitNo" />
-                                                                        @if (User.IsInRole(Roles.Role_Admin))
-                                                                        {
-                                                                            <button type="submit" class="btn btn-default btn-xs">Sil</button>
-                                                                        }
-                                                                    </form>
-                                                                </td>
-                                                               
-                                                            </tr>
-                                                        }
-                                                }
-                                                else
-                                                {
-                                                    <p>Dava Eki bulunamadı</p>
+                    @if (Model.DavaEki != null)
+                    {
+
+                        @foreach (var file in Model.DavaEki)
+                        {
+                            <tr>
+                                <td><b>Dosya İsmi / Dosya</b></td>
+                                <td>
+                                    Ek-@file.KayitNo /
+                                    <button type="submit" class="btn btn-default btn-xs">
+                                        <a href="@Url.Page("Detay", "DownloadFile", new { dosyaId = file.KayitNo })" style="text-decoration:none;">
+                                            Yükle
+                                        </a>
+                                    </button>
+                                    <form method="post" asp-page-handler="DeleteFile"
+                                          onclick="return confirm('Are you sure you want to delete this?')">
+                                        <input type="hidden" name="kayitNo" value="@file.KayitNo" />
+                                        <input type="hidden" name="davaKayitNo" value="@file.DavaKayitNo" />
+                                        @if (User.IsInRole(Roles.Role_Admin))
+                                        {
+                                            <button type="submit" class="btn btn-default btn-xs">Sil</button>
+                                        }
+                                    </form>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <p>Dava Eki bulunamadı</p>
 
 
-                                                }
+                    }
                 </tbody>
             </table>
         </div>
-
-
-
     </div>
-    </div>
+</div>

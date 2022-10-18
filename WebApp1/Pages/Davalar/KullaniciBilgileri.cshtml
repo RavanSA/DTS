@@ -83,13 +83,18 @@
                         </td>
                     </tr>
                     <tr>
+                    <tr>
                         <td>
+                            <b>Kullanıcı Tipi</b>
                         </td>
                         <td>
-                            
+                            <select asp-for="input.Role" asp-items="@Model.input.RoleList" class="form-control w-50">
+                                <option disabled selected> Roles </option>
+                            </select>
                         </td>
                     </tr>
-                    
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -103,92 +108,3 @@ else
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-
-
-
-@*<div class="border container" style="padding:30px;">
-        <div class="panel panel-default">
-
-            <form method="post">
-
-                <div class="panel-heading">
-                    <table style="width:100%">
-                        <tbody>
-                            <tr>
-                                <td style="width:80%">
-                                    <span> Kullanıcı Bilgileri Güncelle - @Model.users.UserName </span>
-                                </td>
-                                <td style="text-align:right;">
-                                    <span>
-
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div asp-validation-summary="All" class="text-danger"></div>
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="input.UserFullName"> Kullanıcı İsmi</label>
-                    </div>
-                    <div class="col-4">
-                        <input asp-for="input.UserFullName" class="form-control" value="@Model.users.UserFullName" />
-                        <span asp-validation-for="input.UserFullName" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="input.UserDuty"> Kullanıcı Görevi</label>
-                    </div>
-                    <div class="col-4">
-                        <input asp-for="input.UserDuty" class="form-control" value="@Model.users.UserDuty" />
-                        <span asp-validation-for="input.UserDuty" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="input.PhoneNumber"> Telefon Numarası</label>
-                    </div>
-                    <div class="col-4">
-                        <input asp-for="input.PhoneNumber" class="form-control" value="@Model.users.PhoneNumber" />
-                        <span asp-validation-for="input.PhoneNumber" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="input.Password">Şifre</label>
-                    </div>
-                    <div class="col-4">
-                        <input asp-for="input.Password" class="form-control" value="@Model.users.PasswordHash" />
-                        <span asp-validation-for="input.Password" class="text-danger"></span>
-                    </div>
-
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="input.ConfirmPassword"> Tekrar Şifre</label>
-                    </div>
-                    <div class="col-4">
-                        <input asp-for="input.ConfirmPassword" class="form-control" value="@Model.users.PasswordHash" />
-                        <span asp-validation-for="input.ConfirmPassword" class="text-danger"></span>
-                    </div>
-                </div>
-
-
-
-
-                <div class="form-group row">
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-dark btn-search">Kaydet</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>*@

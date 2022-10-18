@@ -1,93 +1,89 @@
 ﻿@page
 @model IndexModel
+@using WebApp1.Models 
 @{
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4>@ViewData["Title"]</h4>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="form-row">
-    <div class="form-group col-md-8">
-        <h4>Kullanıcı bilgileri güncelle</h4>
+
+
+<div class="panel panel-deafult" style="width:100%;height:100%;">
+
+
+
+    <div class="panel-heading" style="background-color:#f5f5f5">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width:80%">
+                        <span>Kullanıcı bilgileri güncelle</span>
+                    </td>
+                    <td style="text-align:right;">
+                        <span>
+
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-</div>
-
-<div class="border container" style="padding:30px;">
     <form method="post">
 
-        <center>
-            <div class="form-row">
-                <div class="form-group col-md-12 txt-center">
-                    <h4>Kullanıcı bilgilerini güncelle</h4>
-                    <h5>@Model.users.UserName</h5>
-                </div>
-            </div>
-        </center>
-
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="input.UserFullName"> Kullanıcı İsmi</label>
-            </div>
-            <div class="col-4">
-                <input asp-for="input.UserFullName" class="form-control" value="@Model.users.UserFullName" />
-                <span asp-validation-for="input.UserFullName" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="input.UserDuty"> Kullanıcı Görevi</label>
-            </div>
-            <div class="col-4">
-                <input asp-for="input.UserDuty" class="form-control" value="@Model.users.UserDuty" />
-                <span asp-validation-for="input.UserDuty" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="input.PhoneNumber"> Telefon Numarası</label>
-            </div>
-            <div class="col-4">
-                <input asp-for="input.PhoneNumber" class="form-control" value="@Model.users.PhoneNumber" />
-                <span asp-validation-for="input.PhoneNumber" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="input.Password">Şifre</label>
-            </div>
-            <div class="col-4">
-                <input asp-for="input.Password" class="form-control" value="@Model.users.PasswordHash" />
-                <span asp-validation-for="input.Password" class="text-danger"></span>
-            </div>
-
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="input.ConfirmPassword"> Tekrar Şifre</label>
-            </div>
-            <div class="col-4">
-                <input asp-for="input.ConfirmPassword" class="form-control" value="@Model.users.PasswordHash" />
-                <span asp-validation-for="input.ConfirmPassword" class="text-danger"></span>
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group row">
-            <div class="col-4">
-                <button type="submit" class="btn btn-dark btn-search">Kaydet</button>
-            </div>
-        </div>
+        <table id="davaBilgi" class="table table-hover" style="width:100%;font-size:11px;">
+            <tbody>
+                <tr>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                <tr>
+                    <td>
+                        <b>Kullanıcı İsmi</b>
+                    </td>
+                    <td>
+                        <input asp-for="input.UserFullName" class="form-control w-50" value="@Model.users.UserFullName" />
+                        <span asp-validation-for="input.UserFullName" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Kullanıcı Görevi</b>
+                    </td>
+                    <td>
+                        <input asp-for="input.UserDuty" class="form-control w-50" value="@Model.users.UserDuty" />
+                        <span asp-validation-for="input.UserDuty" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Telefon Numarası</b>
+                    </td>
+                    <td>
+                        <input asp-for="input.PhoneNumber" class="form-control w-50" value="@Model.users.PhoneNumber" />
+                        <span asp-validation-for="input.PhoneNumber" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Şifre</b>
+                    </td>
+                    <td>
+                        <input asp-for="input.Password" class="form-control w-50" value="@Model.users.PasswordHash" />
+                        <span asp-validation-for="input.Password" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Tekrar Şifre</b>
+                    </td>
+                    <td>
+                        <input asp-for="input.ConfirmPassword" class="form-control w-50" value="@Model.users.PasswordHash" />
+                        <span asp-validation-for="input.ConfirmPassword" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-default btn-xs" style="width:20%;font-size:18px;">Güncelle</button>
     </form>
 </div>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

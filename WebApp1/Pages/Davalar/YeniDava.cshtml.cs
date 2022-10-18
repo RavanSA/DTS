@@ -35,32 +35,31 @@ namespace WebApp1.Pages.Davalar
 
         public async Task<IActionResult> OnPost()
         {
-            
-            if (ModelState.IsValid)
-            {
-                await _db.Dava.AddAsync(Dava);
+            var userInfo = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(userInfo);
+
+            Dava.OlusturulmaTarihi = DateTime.UtcNow;
+            Dava.DegistirilmeTarihi = DateTime.UtcNow;
+            Dava.OlusturanKisi = userInfo.UserName.ToString();
+            Dava.DegistirenKisi = userInfo.UserName.ToString();
+            Dava.DavaFormTipi = 1;
 
 
-                var userInfo = await _userManager.GetUserAsync(User);
-                var roles = await _userManager.GetRolesAsync(userInfo);
+                                var yeniDava = new LogTable
+                                {
+                                    UserId = userInfo.Id,
+                                    UserEmail = userInfo.UserName,
+                                    LogTuru = "YENI DAVA OLUSTURULDU",
+                                    LogDate = DateTime.Now,
+                                    Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde, yeni dava olusturuldu Rol: {roles[0]}"
+                                };
 
-                var yeniDava = new LogTable
-                {
-                    UserId = userInfo.Id,
-                    UserEmail = userInfo.UserName,
-                    LogTuru = "YENI DAVA OLUSTURULDU",
-                    LogDate = DateTime.Now,
-                    Aciklama = $"{userInfo.UserName} isimli kullanýcý {DateTime.Now} tarihinde, yeni dava olusturuldu Rol: {roles[0]}"
-                };
+                    await _db.LogTable.AddAsync(yeniDava);       
+                    await _db.Dava.AddAsync(Dava);
+                    await _db.SaveChangesAsync();
 
-                await _db.LogTable.AddAsync(yeniDava);
-                await _db.SaveChangesAsync();
+                    return RedirectToPage("/Davalar/Index");
 
-                return RedirectToPage("/Davalar/Index");
-            } else
-            {
-                return Page();
-            }
         } 
     }
 }

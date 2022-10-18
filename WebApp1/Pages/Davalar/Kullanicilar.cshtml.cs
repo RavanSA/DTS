@@ -58,6 +58,5 @@ namespace WebApp1.Pages.Davalar
 
             return Page();
         }
-
     }
 }

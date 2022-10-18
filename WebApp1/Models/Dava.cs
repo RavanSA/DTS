@@ -64,10 +64,8 @@ namespace WebApp1.Models
         public DateTime? OlusturulmaTarihi { get; set; }
         [DataType(DataType.Date)]   
         public DateTime? DegistirilmeTarihi { get; set; }
-        [Required]
         [StringLength(50, MinimumLength = 1)] 
         public string OlusturanKisi { get; set; }
-        [Required]
         [StringLength(50, MinimumLength = 1)]
         public string DegistirenKisi { get; set; }
         public int? DavaFormTipi { get; set; }

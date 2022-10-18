@@ -13,7 +13,6 @@ namespace WebApp1.Models
         [DataType(DataType.Date)]
         public DateTime? TemyizTarihi { get; set; }
         public bool? TemyizSonucu { get; set; }
-        [Required]
         [StringLength(8000, MinimumLength =1)]
         public string Aciklama { get; set; }
         [Timestamp]

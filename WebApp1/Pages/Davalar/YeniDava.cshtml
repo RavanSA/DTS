@@ -1,216 +1,526 @@
 ﻿@page
 @model WebApp1.Pages.Davalar.YeniDavaModel
 @{
-    Layout = null;
 
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApp1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/sidenav.css" />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-</head>
+<div class="dava-table" style="padding:0px;">
+    <div class="dava-scroll" style="overflow-x:hidden;">
 
-<body class="new-case">
+        <form method="post" id="yeniDavaForm">
 
-<div class="user-dashboard">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="width:80%">
+                                    <span>Yeni Dava Ekle</span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span>
 
-    <div class="form-row">
-        <div class="form-group col-md-8">
-            <h4>Yeni Dava Ekle</h4>
-        </div>
-        <div class="form-group col-md-4">
-            <p><a class="nav-upt-link" asp-area="" asp-page="/Index">Tüm Davalar</a> / Yeni Dava</p>
-        </div>
+                                        @*<a asp-page="DavaGuncelle" asp-route-id="@Model.Dava.DavaKayitNo" type="button" class="btn btn-default btn-xs"
+                                       style="color:#5B636A;font-family:Open Sans;font-size:9pt;width:157px">
+                                        <span class="fal fa-user-cog text-danger"></span> Güncelle
+                                    </a>*@
+
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                @*@{
+                    var id = Request.QueryString.ToString();
+                    string[] tokens = id.Split("=");
+                }*@
+
+                <table id="davaBilgi" class="table table-hover" style="width:100%;font-size:11px;">
+                    <tbody>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <tr>
+                            <td>
+                                <b>Esas No</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.EsasNo" class="form-control w-75" id="esasno" placeholder="Esas No" required />
+                                <span asp-validation-for="Dava.EsasNo" class="text-danger" id="esasNoError"></span>
+                            </td>
+                            <td>
+                                <b>Defter Sıra No</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.DefterSiraNo" class="form-control w-75" id="deftersirano" placeholder="Defter Sıra No" required />
+                                <span asp-validation-for="Dava.DefterSiraNo" class="text-danger" id="defterSiraNoError"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Yargıtay Dosya No</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.YargitayDosyaNo" class="form-control w-75" id="yargitaydosyano" placeholder="Yargıtay Dosya No" required />
+                                <span asp-validation-for="Dava.YargitayDosyaNo" class="text-danger" id="yargitayDosyaNoError"></span>
+                            </td>
+                            <td>
+                                <b>Dava Tarihi</b>
+                            </td>
+                            <td>
+                                <input type="date" asp-for="Dava.DavaTarihi" id="davaTarihi" class="form-control w-75" placeholder="Dava Tarihi" onchange="validateDavaTarihi();" required />
+                                <span asp-validation-for="Dava.DavaTarihi" class="text-danger" id="davaTarihiError"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Dava Türü</b>
+                            </td>   
+                            <td>
+                                <select asp-for="Dava.DavaTuruKayitNo" class="form-control w-75">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <span asp-validation-for="Dava.DavaTuruKayitNo" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <b>Dava Konusu</b>
+                            </td>
+                            <td>
+                                <textarea asp-for="Dava.DavaKonusu" class="form-control w-75" id="davakonusu"
+                                          rows="2" cols="50" maxlength="99" placeholder="Dava Konusu" required>
+                                </textarea>
+                                <span asp-validation-for="Dava.DavaKonusu" class="text-danger" id="davaKonusuError"></span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Lehte</b>
+                            </td>
+                            <td>
+                                <select asp-for="Dava.Lehte" class="form-control w-75">
+                                    <option value="true" selected>Lehte</option>
+                                    <option value="false">Aleyhte</option>
+                                    <option value="">Belirsiz</option>
+                                </select>
+                                <span asp-validation-for="Dava.Lehte" class="text-danger" id="lehteError"></span>
+
+                            </td>
+                            <td>
+                                <b>Sonuç Tahmini</b>
+                            </td>
+                            <td>
+                                <select asp-for="Dava.SonucTahmini" class="form-control w-75">
+                                    <option value="">Yorumsuz</option>
+                                    <option value="true">Lehte</option>
+                                    <option value="false">Aleyhte</option>
+                                </select>
+                                <span asp-validation-for="Dava.SonucTahmini" class="text-danger" id="sonucTahminiError"></span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Mahkemesi</b>
+                            </td>
+                            <td>
+                                <textarea asp-for="Dava.Mahkemesi" class="form-control w-75" id="mahkemesi"
+                                          rows="2" cols="50" maxlength="99" placeholder="Mahkemesi" required></textarea>
+                                <span asp-validation-for="Dava.Mahkemesi" class="text-danger" id="mahkemesiError"></span>
+
+                            </td>
+                            <td>
+                                <b>Dava Tutarı</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.DavaTutari" id="davatutari" class="form-control w-75" placeholder="Dava Tutarı" required/>
+                                <span asp-validation-for="Dava.DavaTutari" class="text-danger" id="davatutariError"></span>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Islah Değeri</b>
+                            </td>
+                            <td>
+                                <input type="text" asp-for="Dava.IslahDegeri" id="islahdegeri" class="form-control w-75" placeholder="Islah Değeri" required/>
+                                <span asp-validation-for="Dava.IslahDegeri" class="text-danger" id="islahDegeriError"></span>
+                            </td>
+                            <td>
+                                <b>Para Birimi Kayıt No</b>
+                            </td>
+                            <td>
+                                <select asp-for="Dava.ParaBirimiKayitNo" class="form-control w-75">
+                                    <option value="1">$</option>
+                                    <option value="2" selected>tl</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Davacı</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.Davaci" class="form-control w-75" id="davaci" placeholder="Davacı" required/>
+                                <span asp-validation-for="Dava.Davaci" class="text-danger" id="davaciError"></span>
+                            </td>
+                            <td>
+                                <b>Davalı</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.Davali" class="form-control w-75" id="davali" placeholder="Davalı" required />
+                                <span asp-validation-for="Dava.Davali" class="text-danger" id="davaliError"></span>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Diğer Davacılar</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.DigerDavacilar" class="form-control w-75" id="digerdavacilar" placeholder="Islah Değeri" required/>
+                                <span asp-validation-for="Dava.DigerDavacilar" class="text-danger" id="digerDavacilarError"></span>
+
+                            </td>
+                            <td>
+                                <b>Diğer Davalılar</b>
+                            </td>
+                            <td>
+                                <input asp-for="Dava.DigerDavalilar" class="form-control w-75" id="digerdavalilar" placeholder="Diğer Davalılar" required />
+                                <span asp-validation-for="Dava.DigerDavalilar" class="text-danger" id="digerDavalilarError"></span>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Açıklama</b>
+                            </td>
+                            <td>
+                                <textarea asp-for="Dava.Aciklama" class="form-control w-75" id="aciklama"
+                                          rows="6" cols="80" maxlength="7999" placeholder="Açıklama" required></textarea>
+                                <span asp-validation-for="Dava.Aciklama" class="text-danger" id="aciklamaError"></span>
+                            </td>
+                            <td>
+                                <b>Temyiz Edildi</b>
+                            </td>
+                            <td>
+                                <select asp-for="Dava.TemyizEdildi" class="form-control w-75">
+                                    <option value="true">Edildi</option>
+                                    <option value="false" selected>Edilmedi</option>
+                                    <option value="">Belirsiz</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="form-group row offset-4">
+                <div class="col-4">
+                    <input style="width:100%; font-size:18px;" type="submit" value="Ekle" id="yeniDava" class="btn btn-default btn-xs" />
+                </div>
+            </div>
+
+        </form>
     </div>
-
-    <div class="border container" style="padding:30px;">
-        <div class="new-case-scroll">
-            <form method="post">
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.EsasNo">Esas No</label>
-                        <input asp-for="Dava.EsasNo" class="form-control" placeholder="Esas No" required />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DefterSiraNo">Defter Sıra No</label>
-                        <input asp-for="Dava.DefterSiraNo" class="form-control" placeholder="Defter Sıra No" required />
-                    </div>
-                </div>
-                <br />
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.YargitayDosyaNo">Yargıtay Dosya No</label>
-                        <input asp-for="Dava.YargitayDosyaNo" class="form-control" placeholder="Yargıtay Dosya No" required />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.DavaTarihi">Dava Tarihi</label>
-                        <input asp-for="Dava.DavaTarihi" class="form-control" placeholder="Dava Tarihi" required />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.DavaTuruKayitNo">Dava Türü</label>
-                        <select asp-for="Dava.DavaTuruKayitNo" class="form-control">
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <br />
-
-                <div class="form-group">
-                    <label asp-for="Dava.DavaKonusu"></label>
-                    <textarea asp-for="Dava.DavaKonusu" class="form-control"
-                              rows="2" cols="50" maxlength="99" placeholder="Dava Konusu" required>
-                 </textarea>
-                </div>
-
-                <br />
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.Lehte">Dava Lehte</label>
-                        <select asp-for="Dava.Lehte" class="form-control">
-                            <option value="true" selected>Lehte</option>
-                            <option value="false">Aleyhte</option>
-                            <option value="">Belirsiz</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.SonucTahmini">Tahmini Sonuç</label>
-                        <select asp-for="Dava.SonucTahmini" class="form-control">
-                            <option value="">Yorumsuz</option>
-                            <option value="true">Lehte</option>
-                            <option value="false">Aleyhte</option>
-                        </select>
-                    </div>
-                </div>
-
-                <br />
-                <div class="form-group">
-                    <label asp-for="Dava.Mahkemesi">Mahkemesi</label>
-                    <textarea asp-for="Dava.Mahkemesi" class="form-control"
-                              rows="2" cols="50" maxlength="99" placeholder="Mahkemesi" required></textarea>
-                </div>
-
-                <br />
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.DavaTutari">Dava Tutarı</label>
-                        <input asp-for="Dava.DavaTutari" class="form-control" placeholder="Dava Tutarı" type="number" />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.IslahDegeri">Islah Değeri</label>
-                        <input asp-for="Dava.IslahDegeri" class="form-control" placeholder="Islah Değeri" type="number" />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Dava.ParaBirimiKayitNo">Para Birimi</label>
-                        <select asp-for="Dava.ParaBirimiKayitNo" class="form-control">
-                            <option value="1">$</option>
-                            <option value="2" selected>tl</option>
-                        </select>
-                    </div>
-                </div>
-
-                <br />
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.Davaci">Davacı</label>
-                        <input asp-for="Dava.Davaci" class="form-control" placeholder="Davacı" required />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.Davali">Davalı</label>
-                        <input asp-for="Dava.Davali" class="form-control" placeholder="Davalı" required />
-                    </div>
-                </div>
-
-                <br />
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DigerDavacilar">Diğer Davacılar</label>
-                        <input asp-for="Dava.DigerDavacilar" class="form-control" placeholder="Diğer Davacılar" required />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DigerDavalilar">Diğer Davalılar</label>
-                        <input asp-for="Dava.DigerDavalilar" class="form-control" placeholder="Diğer Davalılar" required />
-                    </div>
-                </div>
-
-                <br />
-                <div class="form-group">
-                    <label asp-for="Dava.Aciklama">Açıklama</label>
-                    <textarea asp-for="Dava.Aciklama" class="form-control"
-                              rows="6" cols="80" maxlength="7999" placeholder="Açıklama" required></textarea>
-                </div>
-                <br />
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.OlusturulmaTarihi">Oluşturulma Tarihi</label>
-                        <input asp-for="Dava.OlusturulmaTarihi" class="form-control" placeholder="Oluşturulma Tarihi" required />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DegistirilmeTarihi">Değiştirilme Tarihi</label>
-                        <input asp-for="Dava.DegistirilmeTarihi" class="form-control" placeholder="Değiştirilme Tarihi" />
-                    </div>
-                </div>
-                <br />
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.OlusturanKisi">Oluşturan Kişi</label>
-                        <input asp-for="Dava.OlusturanKisi" class="form-control" placeholder="Oluşturan Kişi" required />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DegistirenKisi">Değiştiren Kişi</label>
-                        <input asp-for="Dava.DegistirenKisi" class="form-control" placeholder="Değiştiren Kişi" required />
-                    </div>
-                </div>
-                <br />
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Dava.DavaFormTipi">Dava Form Tipi</label>
-                        <input asp-for="Dava.DavaFormTipi" class="form-control" placeholder="Dava Form Tipi" />
-                    </div>
-                    <div class="form-group col-md-6">
-
-                        <label asp-for="Dava.TemyizEdildi">Temyiz Durumu</label>
-                        <select asp-for="Dava.TemyizEdildi" class="form-control">
-                            <option value="true">Edildi</option>
-                            <option value="false">Edilmedi</option>
-                            <option value="" selected>Belirsiz</option>
-                        </select>
-                    </div>
-                </div>
-                <br />
-
-                <div class="form-group row offset-4">
-
-                    <div class="col-3">
-                        <input type="submit" value="Ekle" class="btn btn-dark btn-search" />
-                    </div>
-
-                </div>
-
-            </form>
-        </div>
-    </div>
-
 </div>
 
+<script>
+    var yeniDava = document.getElementById("yeniDava");
 
-</body>
-</html>
+    var esasNoVal= true;
+    var defterSiraNoVal = true;
+    var yargitayDosyaNoVal = true;
+    var davaTarihiVal = true;
+    var davaKonusuVal= true;
+    var lehteVal = true;
+    var sonucTahminiVal = true;
+    var mahkemesiVal = true;
+    var davaTutariVal = true;
+    var islahDegeriVal = true;
+    var davaciVal = true;
+    var davaliVal = true;
+    var digerDavacilarVal = true;
+    var digerDavalilarVal = true;
+    var aciklamaVal = true;
+
+    document.getElementById("yeniDava").setAttribute("disabled", true);
+
+    var esasNo = document.getElementById("esasno");
+    esasNo.addEventListener("change", () => {
+        var esasNo = document.getElementById("esasno").value.toString();
+        var esasNoError = document.getElementById("esasNoError");
+        if (esasNo.length == 0) {
+            esasNoError.textContent = "Esas No boş olamaz";
+            esasNoVal = true;
+        } else if (esasNo.length < 3 || esasNo.length > 100) {
+            esasNoVal = true;
+            esasNoError.textContent = "Esas No 3 ve 100 karakter arasında olmalıdır";
+        } else {
+            esasNoError.textContent = "";
+            esasNoVal = false;
+        }
+    });
+
+
+    var defterSiraNo = document.getElementById("deftersirano");
+    defterSiraNo.addEventListener("change", () => {
+        var defterSiraNo = document.getElementById("deftersirano").value.toString();
+        var defterSiraNoError = document.getElementById("defterSiraNoError");
+        if (defterSiraNo.length == 0) {
+            defterSiraNoVal = true;
+            defterSiraNoError.textContent = "Defter Sıra No boş olamaz";
+        } else if (defterSiraNo.length < 3 || defterSiraNo.length > 100) {
+            defterSiraNoVal = true;
+            defterSiraNoError.textContent = "Defter sıra No 3 ve 100 karakter arasında olmalıdır";
+        } else {
+            defterSiraNoVal = false;
+            defterSiraNoError.textContent = "";
+        }
+    });
+
+
+    var yargitayDosyaNo = document.getElementById("yargitaydosyano");
+    yargitayDosyaNo.addEventListener("change", () => {
+        var yargitayDosyaNo = document.getElementById("yargitaydosyano").value.toString();
+        var yargitayDosyaNoError = document.getElementById("yargitayDosyaNoError");
+        if (yargitayDosyaNo.length == 0) {
+            yargitayDosyaNoVal = true;
+            yargitayDosyaNoError.textContent = "Yargıtay dosya no boş olamaz";
+        } else if (yargitayDosyaNo.length < 3 || yargitayDosyaNo.length > 20) {
+            yargitayDosyaNoVal = true;
+            yargitayDosyaNoError.textContent = "Yargıtay dosya no 3 ve 20 karakter arasında olmalıdır";
+        } else {
+            yargitayDosyaNoVal = false;
+            yargitayDosyaNoError.textContent = "";
+        }
+    });
+
+
+
+    var davaKonusu = document.getElementById("davakonusu");
+    davaKonusu.addEventListener("change", () => {
+        var davaKonusu = document.getElementById("davakonusu").value.toString();
+        var davaKonusuError = document.getElementById("davaKonusuError");
+        if (davaKonusu.length == 0) {
+            davaKonusuVal = true;
+            davaKonusuError.textContent = "Dava Konusu boş olamaz"
+        } else if (davaKonusu.length < 3 || davaKonusu.length > 100) {
+            davaKonusuVal = true;
+            davaKonusuError.textContent = "Dava Konusu 3 ve 100 karakter arasında olmalıdır";
+        } else {
+            davaKonusuVal = false;
+            davaKonusuError.textContent = "";
+        }
+    });
+
+    var mahkemesi = document.getElementById("mahkemesi");
+    mahkemesi.addEventListener("change", () => {
+        var mahkemesi = document.getElementById("mahkemesi").value.toString();
+        var mahkemesiError = document.getElementById("mahkemesiError");
+        if (mahkemesi.length == 0) {
+            mahkemesiVal = true;
+            mahkemesiError.textContent = "Mahkemesi boş olamaz";
+        } else if (mahkemesi.length < 3 || mahkemesi.length > 100) {
+            mahkemesiVal = true;
+            mahkemesiError.textContent = "Mahkemesi 3 ve 100 karakter arasında olmalıdır";
+        } else {
+            mahkemesiVal = false; 
+            mahkemesiError.textContent = "";
+        }
+    });
+
+    var davaTutari = document.getElementById("davatutari");
+    davaTutari.addEventListener("change", () => {
+        var davaTutari = parseInt(document.getElementById("davatutari").value);
+        var davaTutariError = document.getElementById("davatutariError");
+        if (davaTutari == 0 || davaTutari == NaN) {
+            davaTutariError.textContent = "Dava tutarı boş olamaz";
+            davaTutariVal = true;
+        } else if (!/^[0-9]+$/.test(davaTutari)) {
+            davaTutariVal = true;
+            davaTutariError.textContent = "Dava tutarı sadece rakamlar içermelidir"
+        } else {
+            davaTutariVal = false;
+            davaTutariError.textContent = "";
+        }
+    });
+
+    var islahDegeri = document.getElementById("islahdegeri");
+    islahDegeri.addEventListener("change", () => {
+        var islahDegeri = parseInt(document.getElementById("islahdegeri").value);
+        var islahDegeriError = document.getElementById("islahDegeriError");
+        if (islahDegeri == 0 || islahDegeri == NaN) {
+            islahDegeriVal = true;
+            islahDegeriError.textContent = "İslah değeri boş olamaz";
+        } else if (!/^[0-9]+$/.test(islahDegeri)) {
+            islahDegeriVal = true;
+            islahDegeriError.textContent = "İslah değeri sadece rakamlar içermelidir"
+        } else {
+            islahDegeriVal = false;
+            islahDegeriError.textContent = "";
+        }
+    });
+
+    var davaci = document.getElementById("davaci");
+    davaci.addEventListener("change", () => {
+        var davaci = document.getElementById("davaci").value.toString();
+        var davaciError = document.getElementById("davaciError");
+        if (davaci.length == 0) {
+            davaciVal = true;
+            davaciError.textContent = "Davaci boş olamaz";
+        } else if (davaci.length < 3 || davaci.length > 50) {
+            davaciVal = true;
+            davaciError.textContent = "Davaci 3 ve 50 karakter arasında olmalıdır";
+        } else {
+            davaciVal = false;
+            davaciError.textContent = "";
+        }
+    });
+
+    var davali = document.getElementById("davali");
+    davali.addEventListener("change", () => {
+        var davali = document.getElementById("davali").value.toString();
+        var davaliError = document.getElementById("davaliError");
+        if (davali.length == 0) {
+            davaliVal = true;
+            davaliError.textContent = "Davali boş olamaz";
+        } else if (davali.length < 3 || davali.length > 100) {
+            davaliVal = true;
+            davaliError.textContent = "Davali 3 ve 50 kararter arasında olmalıdır";
+        } else {
+            davaliVal = false;
+            davaliError.textContent = "";
+        }
+    });
+
+
+
+    var digerDavacilar = document.getElementById("digerdavacilar");
+    digerDavacilar.addEventListener("change", () => {
+        var digerDavacilar = document.getElementById("digerdavacilar").value.toString();
+        var digerDavacilarError = document.getElementById("digerDavacilarError");
+        if (digerDavacilar.length == 0) {
+            digerDavacilarVal = true;
+            digerDavacilarError.textContent = "Diger davacilar boş olamaz";
+        } else if (digerDavacilar.length < 3 || digerDavacilar.length > 100) {
+            digerDavacilarVal = true;
+            digerDavacilarError.textContent = "Diger davacilar 3 ve 100 kararter arasında olmalıdır";
+        } else {
+            digerDavacilarVal = false;
+            digerDavacilarError.textContent = "";
+        }
+    });
+
+    var digerDavalilar = document.getElementById("digerdavalilar");
+    digerDavalilar.addEventListener("change", () => {
+        var digerDavalilar = document.getElementById("digerdavalilar").value.toString();
+        var digerDavalilarError = document.getElementById("digerDavalilarError");
+        if (digerDavalilar.length == 0) {
+            digerDavalilarVal = true; 
+            digerDavalilarError.textContent = "Diger Davalilar boş olamaz";
+        } else if (digerDavalilar.length < 3 || digerDavalilar > 100) {
+            digerDavalilarVal = true;
+            digerDavalilarError.textContent = "Diger davalilar 3 ve 100 karakter arasında olmalıdır";
+        } else {
+            digerDavalilarVal = false;
+            digerDavalilarError.textContent = "";
+        }
+    });
+
+    var aciklama = document.getElementById("aciklama");
+    aciklama.addEventListener("change", () => {
+        var aciklama = document.getElementById("aciklama").value.toString();
+        var aciklamaError = document.getElementById("aciklamaError");
+        if (aciklama.length == 0) {
+            aciklamaVal = true;
+            aciklamaError.textContent = "Açıklama boş olamaz";
+        } else if (aciklama.length < 20 || aciklama.length > 8000) {
+            aciklamaVal = true;
+            aciklamaError.textContent = "Açıklama 20 ve 8000 karakter arasında olmalıdır";
+        } else {
+            aciklamaVal = false;
+            aciklamaError.textContent = "";
+        }
+    });
+
+
+
+    function validateDavaTarihi() {
+
+        var davaTarihi = document.getElementById("davaTarihi").value.toString();
+        if (davaTarihi.match(/^(19|20)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])$/) === null) {
+            document.getElementById("davaTarihiError").textContent = "Yanlış tarih formatı";
+            davaTarihiVal = true;
+            //document.getElementById("yeniDava").setAttribute("disabled", true);
+        } else {
+            document.getElementById("davaTarihiError").textContent = "";
+            davaTarihiVal = false;
+            //document.getElementById("yeniDava").                                                                                                 mççççççççççççççççççççççççççç       disabled = false;
+        }
+
+        var currentDate = new Date();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        var day = currentDate.getDay();
+
+        var strTestDate = (year.toString() + "-" + month.toString() + "-" + day.toString());
+
+        var davaTarihiDate = new Date(davaTarihi);
+
+        var testDate = new Date(strTestDate);
+        if (davaTarihiDate < testDate) {
+            document.getElementById("davaTarihiError").textContent = "Geçersiz dava tarihi";
+            davaTarihiVal = true;
+            //document.getElementById("yeniDava").setAttribute("disable", true);
+        } 
+    }
+
+
+    var form = document.getElementById("yeniDavaForm");
+    form.addEventListener("change", () => {
+
+
+        if (!esasNoVal && !defterSiraNoVal && !yargitayDosyaNoVal && !davaTarihiVal
+            && !davaKonusuVal && !mahkemesiVal && !davaTutariVal && !islahDegeriVal && !davaciVal && !davaliVal
+            && !digerDavacilarVal && !digerDavalilarVal && !aciklamaVal) {
+            console.log("test","button")
+            enabled = true;
+            document.getElementById("yeniDava").disabled = false;
+        }
+
+    });
+
+    console.log("esasno", esasNoVal);
+    console.log("defterSiraNoVal", defterSiraNoVal);
+    console.log("targitayDosya", yargitayDosyaNoVal);
+    console.log("davatahirival", davaTarihiVal);
+    console.log("davakonusu", davaKonusuVal);
+    console.log("mahkemesi ", mahkemesiVal);
+    console.log("davatutati", davaTutariVal);
+    console.log("islahDegeri", islahDegeriVal);
+    console.log("davaciVal", davaciVal);
+    console.log("davaliVal", davaliVal);
+    console.log("digerdavaci", digerDavacilarVal);
+    console.log("digerDAVALİ", digerDavalilarVal);
+    console.log("aciklama", aciklamaVal);
+    console.log("************************")
+
+</script>
+

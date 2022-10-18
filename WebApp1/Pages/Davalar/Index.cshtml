@@ -4,36 +4,6 @@
 @{
 }
 
-@*<div class="form-row" style="width:90%">
-    <div class="form-group col-md-3">
-        <h4>Davalar</h4>
-    </div>
-    <div class="form-group col-md-2">
-        <form asp-page="/Davalar" method="get">
-            <input type="text" name="SearchString" value="@Model.CurrentFilter"
-                   placeholder="Ara.." class="form-control" />
-        </form>
-    </div>
-    <div class="form-group col-md-2" style="margin-left:80px;">
-        <a class="btn btn-dark" asp-page="YeniDava">
-            <i class="fa fa-plus" aria-hidden="true"></i> Dava Ekle
-        </a>
-    </div>
-    @if (User.IsInRole(Roles.Role_Admin))
-    {
-        <div class="form-group col-md-4">
-            <form method="post">
-
-                <button class="btn btn-dark" type="submit" value="Dosya Oluştur" asp-page-handler="Export">
-                    <i class="fa fa-download" aria-hidden="true"></i> Dosya Oluştur
-                </button>
-
-            </form>
-        </div>
-    }
-</div>*@
-
-<br />
 
 @if (Model.Dava.Count() > 0)
 {
